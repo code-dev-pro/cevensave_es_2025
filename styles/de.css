@@ -1,0 +1,76 @@
+html[lang='de'] .tools_legend p {
+  font-size: 18px;
+}
+html[lang='de'] .tool_content--table thead tr:last-child th {
+  font-size: 16px;
+}
+html[lang='de'] #tool {
+  padding: 0 2rem;
+}
+
+html[lang='de'] .hospital th:first-child,
+html[lang='de'] .hospital td:first-child {
+  width: 100px;
+}
+
+html[lang='de'] .hospital th:nth-child(2),
+html[lang='de'] .hospital td:nth-child(2) {
+  width: 175px !important;
+}
+html[lang='de'] .hospital th:nth-child(6),
+html[lang='de'] .hospital td:nth-child(6),
+html[lang='de'] .patient th:nth-child(5),
+html[lang='de'] .patient td:nth-child(5),
+html[lang='de'] .event th:nth-child(4),
+html[lang='de'] .event td:nth-child(4) {
+  width: 105px !important;
+}
+
+html[lang='de'] th:nth-child(13),
+html[lang='de'] td:nth-child(13),
+html[lang='de'] .delete_row_header,
+html[lang='de'] .tool_content--table tbody .col_13 {
+  width: 70px !important;
+}
+html[lang='de'] select,
+html[lang='de'] option:checked {
+  padding-left: 8px;
+  padding-right: 40px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html[lang='de'] .bloc-container p {
+  width: 180px;
+}
+
+html[lang='de'] .bloc-usage {
+  width: 420px;
+}
+
+html[lang='de'] #bloc-costs {
+  position: relative;
+  top: 0;
+  left: -20px;
+  padding: 0;
+}
+
+html[lang='de'] #bloc-costs-top-2 {
+  gap: 15px;
+}
+
+html[lang='de'] #tool_button,
+html[lang='de'] #output_button,
+html[lang='de'] #tool_button_2 {
+  font-size: 40px;
+}
+html[lang='de'] #tool_button {
+  padding-right: 55px;
+}
+html[lang='de'] #tool_button svg,
+html[lang='de'] #output_button svg,
+html[lang='de'] #tool_button_2 svg {
+  width: 40px;
+}

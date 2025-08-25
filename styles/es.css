@@ -1,0 +1,58 @@
+html[lang='es'] #tool_button,
+html[lang='es'] #output_button,
+html[lang='es'] #tool_button_2 {
+  font-size: 40px;
+}
+html[lang='es'] #tool_button {
+  padding-right: 100px;
+}
+html[lang='es'] #tool_button svg,
+html[lang='es'] #output_button svg,
+html[lang='es'] #tool_button_2 svg {
+  width: 40px;
+}
+
+html[lang='es'] .bloc-container p {
+  width: 180px;
+}
+
+html[lang='es'] #bloc-costs {
+  position: relative;
+  top: 0;
+  left: -20px;
+  padding: 0;
+}
+
+html[lang='es'] #bloc-costs-top-2 {
+  gap: 15px;
+}
+
+html[lang='es'] .hospital th:first-child,
+html[lang='es'] .hospital td:first-child {
+  width: 100px;
+}
+
+html[lang='es'] .hospital th:nth-child(3),
+html[lang='es'] .hospital td:nth-child(3),
+html[lang='es'] .patient th:nth-child(2),
+html[lang='es'] .patient td:nth-child(2),
+html[lang='es'] .event th:nth-child(1),
+html[lang='es'] .event td:nth-child(1) {
+  width: 120px !important;
+}
+
+html[lang='es'] .hospital th:nth-child(6),
+html[lang='es'] .hospital td:nth-child(6),
+html[lang='es'] .patient th:nth-child(5),
+html[lang='es'] .patient td:nth-child(5),
+html[lang='es'] .event th:nth-child(4),
+html[lang='es'] .event td:nth-child(4) {
+  width: 120px !important;
+}
+
+html[lang='es'] th:nth-child(13),
+html[lang='es'] td:nth-child(13),
+html[lang='es'] .delete_row_header,
+html[lang='es'] .tool_content--table tbody .col_13 {
+  width: 70px !important;
+}
