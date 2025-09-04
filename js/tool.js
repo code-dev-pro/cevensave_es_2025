@@ -69,7 +69,7 @@ var toolModule = (function () {
 
   var defaultDosage = {
     bleeding_event: {
-      cevenfacta: 1.5,
+      cevenfacta:  1.5,
       apcc: 1.82,
       eptacogalfa: 1.52,
     },
@@ -108,12 +108,17 @@ var toolModule = (function () {
       },
       subsequentDoses: defaultDosagePerKg.cevenfacta,
       nbOfDoses: {
-        bleeding_event: defaultDosage[selectTypeEvent_1[0].value].cevenfacta,
-        breakthrough_bleed: defaultDosage[selectTypeEvent_2[0].value].cevenfacta,
+        bleeding_event: "",
+        //  met la case concernée dans un état initial vide
+        // bleeding_event: defaultDosage[selectTypeEvent_1[0].value].cevenfacta,
+        breakthrough_bleed:
+          defaultDosage[selectTypeEvent_2[0].value].cevenfacta,
         minor_surgery: defaultDosage[selectTypeEvent_1[1].value].cevenfacta,
         major_surgery: defaultDosage[selectTypeEvent_1[2].value].cevenfacta,
       },
-      pricePerMg: selectCevenfactaPresentation[0].price,
+      pricePerMg: "",
+      //  met la case concernée dans un état initial vide
+      // pricePerMg:  selectCevenfactaPresentation[0].price,
     },
     apcc: {
       presentation: selectApccPresentation[0].value,
@@ -142,12 +147,17 @@ var toolModule = (function () {
       },
       subsequentDoses: defaultDosagePerKg.eptacogalfa,
       nbOfDoses: {
-        bleeding_event: defaultDosage[selectTypeEvent_1[0].value].eptacogalfa,
-        breakthrough_bleed: defaultDosage[selectTypeEvent_2[0].value].eptacogalfa,
+        bleeding_event: "",
+        //  met la case concernée dans un état initial vide
+        //  bleeding_event: defaultDosage[selectTypeEvent_1[0].value].eptacogalfa,
+        breakthrough_bleed:
+          defaultDosage[selectTypeEvent_2[0].value].eptacogalfa,
         minor_surgery: defaultDosage[selectTypeEvent_1[1].value].eptacogalfa,
         major_surgery: defaultDosage[selectTypeEvent_1[2].value].eptacogalfa,
       },
-      pricePerMg: selectEptacogPresentation[0].price,
+      pricePerMg: "",
+      //  met la case concernée dans un état initial vide
+      // pricePerMg: selectEptacogPresentation[0].price,
     },
   };
 
