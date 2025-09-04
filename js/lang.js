@@ -27,6 +27,7 @@ var languageModule = (function () {
 
   var lang = {
     en: {
+      warning_message: "",
       // home page
       overview_tool: "Overview of tool",
       overview_tool_text:
@@ -150,6 +151,7 @@ var languageModule = (function () {
       `,
     },
     de: {
+      warning_message:"",
       // home page
       overview_tool: "Überblick über das Tool",
       overview_tool_text:
@@ -341,6 +343,7 @@ var languageModule = (function () {
       outputright_notes:
         "* Si el número después del punto decimal es igual a 5 o más, el número se redondea hacia arriba.",
       tool_button_text_2: "Herramienta",
+      warning_message: "Por favor, complete todos los campos obligatorios para obtener un resultado.",
 
       // popup
       popup_1_title: "Calculadora de dosis​",
@@ -448,6 +451,7 @@ var languageModule = (function () {
     // popup
     dom.popup_1_title = document.getElementById('popup_1_title');
     dom.popup_1_text = document.getElementById('popup_1_text');
+    dom.has_error = document.querySelector('.has_error');
   }
 
   function setLang() {
@@ -524,6 +528,7 @@ var languageModule = (function () {
     dom.event_body_weight.innerHTML = langObject.event_body_weight;
     dom.event_events_patients.innerHTML = langObject.event_events_patients;
 
+    dom.has_error.innerHTML = langObject.warning_message;
     //output page
     dom.outputleft_title.innerHTML = langObject.outputleft_title;
     dom.label_cost_saving_vs_alfa.innerHTML = langObject.label_cost_saving_vs_alfa;

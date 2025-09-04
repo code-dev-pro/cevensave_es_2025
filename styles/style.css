@@ -984,3 +984,13 @@ sup {
     border-left: 1px solid #b0b7be;
     border-right: 1px solid #b0b7be;
 }
+
+
+
+.has_error {
+  color: #D6412B;
+  opacity: 1;
+}
+.has_error_hide{
+  opacity: 0;
+}

@@ -108,7 +108,7 @@ var toolModule = (function () {
       },
       subsequentDoses: defaultDosagePerKg.cevenfacta,
       nbOfDoses: {
-        bleeding_event: "",
+         bleeding_event: "",
         //  met la case concernée dans un état initial vide
         // bleeding_event: defaultDosage[selectTypeEvent_1[0].value].cevenfacta,
         breakthrough_bleed:
@@ -116,9 +116,9 @@ var toolModule = (function () {
         minor_surgery: defaultDosage[selectTypeEvent_1[1].value].cevenfacta,
         major_surgery: defaultDosage[selectTypeEvent_1[2].value].cevenfacta,
       },
-      pricePerMg: "",
+       pricePerMg: "",
       //  met la case concernée dans un état initial vide
-      // pricePerMg:  selectCevenfactaPresentation[0].price,
+      //  pricePerMg:  selectCevenfactaPresentation[0].price,
     },
     apcc: {
       presentation: selectApccPresentation[0].value,
@@ -147,17 +147,17 @@ var toolModule = (function () {
       },
       subsequentDoses: defaultDosagePerKg.eptacogalfa,
       nbOfDoses: {
-        bleeding_event: "",
+         bleeding_event: "",
         //  met la case concernée dans un état initial vide
-        //  bleeding_event: defaultDosage[selectTypeEvent_1[0].value].eptacogalfa,
+        // bleeding_event: defaultDosage[selectTypeEvent_1[0].value].eptacogalfa,
         breakthrough_bleed:
           defaultDosage[selectTypeEvent_2[0].value].eptacogalfa,
         minor_surgery: defaultDosage[selectTypeEvent_1[1].value].eptacogalfa,
         major_surgery: defaultDosage[selectTypeEvent_1[2].value].eptacogalfa,
       },
-      pricePerMg: "",
+       pricePerMg: "",
       //  met la case concernée dans un état initial vide
-      // pricePerMg: selectEptacogPresentation[0].price,
+      //  pricePerMg: selectEptacogPresentation[0].price,
     },
   };
 
@@ -189,6 +189,7 @@ var toolModule = (function () {
     cevensave.logoP = document.querySelector('#logo p');
     cevensave.logoApp = document.querySelector('#logo_app');
     cevensave.popupButton = document.getElementById('popup_button');
+    cevensave.hasError = document.querySelector('.has_error');
   }
 
   var tableScroll = new IScroll('#table_wrapper', {
@@ -228,10 +229,58 @@ var toolModule = (function () {
 
   function initAppEvents() {
     cevensave.outputButton.addEventListener('click', function () {
-      cevensave.toolSection.style.display = 'none';
-      cevensave.outputButton.style.display = 'none';
-      cevensave.outputSection.style.display = 'flex';
-      cevensave.goBackToTools.style.display = 'flex';
+      
+  
+      var hasError = false;
+      var colum_11 = document.querySelectorAll(".col_11");
+      var colum_12 = document.querySelectorAll(".col_12");
+     
+      for (var i = 0; i < colum_11.length; i++) {
+        var col_11_cevenfacta = colum_11[i].querySelector("input[data-key='cevenfacta']");
+        var col_11_eptacogalfa = colum_11[i].querySelector("input[data-key='eptacogalfa']");
+         
+        if (col_11_cevenfacta) {
+          if (col_11_cevenfacta.value === "") {
+            hasError = true;
+          }
+        }
+        if (col_11_eptacogalfa) {
+          if (col_11_eptacogalfa.value === "") {
+            hasError = true;
+          }
+        }
+          
+         
+      }
+
+      for (var i = 0; i < colum_12.length; i++) {
+        var col_12_cevenfacta = colum_12[i].querySelector("input[data-key='cevenfacta']");
+        var col_12_eptacogalfa = colum_12[i].querySelector("input[data-key='eptacogalfa']");
+         
+        if (col_12_cevenfacta) {
+          if (col_12_cevenfacta.value === "") {
+            hasError = true;
+          }
+        }
+        if (col_12_eptacogalfa) {
+          if (col_12_eptacogalfa.value === "") {
+            hasError = true;
+          }
+        }
+          
+         
+      }
+      
+      if (hasError) {
+        cevensave.hasError.classList.remove("has_error_hide");
+        return;
+      }
+     
+
+      cevensave.toolSection.style.display = "none";
+      cevensave.outputButton.style.display = "none";
+      cevensave.outputSection.style.display = "flex";
+      cevensave.goBackToTools.style.display = "flex";
       outputModule.refresh();
       cevensave.popupButton.style.display = "flex";
     });
@@ -432,17 +481,24 @@ var toolModule = (function () {
     }
 
     var nbOfDosesInputs = table.querySelectorAll('input[name=nb_of_doses]');
+    
     for (var i = 0; i < nbOfDosesInputs.length; i++) {
       nbOfDosesInputs[i].addEventListener('blur', function () {
+        document.querySelector(".has_error").classList.add("has_error_hide");
         handleNbOfDosesChange(table, this);
       });
+
+        nbOfDosesInputs[i].addEventListener("change", function () {
+          document.querySelector(".has_error").classList.add("has_error_hide");
+         
+        });
 
       nbOfDosesInputs[i].addEventListener('keyup', function (event) {
         if (event.keyCode === 13) {
           handleNbOfDosesChange(table, this);
         }
       });
-    }
+     }
 
     var pricePerMgInputs = table.querySelectorAll('input[name=price_per_mg]');
     for (var i = 0; i < pricePerMgInputs.length; i++) {
@@ -450,7 +506,13 @@ var toolModule = (function () {
         handlePriceChange(table, this);
       });
 
+      pricePerMgInputs[i].addEventListener("change", function () {
+        document.querySelector(".has_error").classList.add("has_error_hide");
+       
+      });
+
       pricePerMgInputs[i].addEventListener('keyup', function (event) {
+         document.querySelector(".has_error").classList.add("has_error_hide");
         if (event.keyCode === 13) {
           handlePriceChange(table, this);
         }
@@ -714,6 +776,7 @@ var toolModule = (function () {
   }
 
   function handleSubsequentDoseChange(table, input) {
+   
     var data = window.dataToOutput;
     var dataIndex = input.getAttribute('data-index');
     var dataKey = input.getAttribute('data-key');
@@ -730,17 +793,20 @@ var toolModule = (function () {
     }
 
     if (dataKey === 'cevenfacta' || dataKey === 'eptacogalfa') {
+      
       patient[dataKey].subsequentDoses = isNaN(subsequentDose)
         ? dataTemplate[dataKey].subsequentDoses
         : Math.round(Math.min(Math.max(subsequentDose, 1), 200000)) / 1000;
     }
 
     window.dataToOutput = data;
-
+    
     refreshTable(table);
   }
 
   function handleNbOfDosesChange(table, input) {
+  
+
     var data = window.dataToOutput;
     var dataIndex = input.getAttribute('data-index');
     var dataKey = input.getAttribute('data-key');
@@ -749,7 +815,7 @@ var toolModule = (function () {
     var patient = data.find(function (patient) {
       return patient.patientIndex === patientNumber;
     });
-
+  
     patient[dataKey].nbOfDoses[patient.typeOfEvent] = isNaN(nbDoses)
       ? dataTemplate[dataKey].nbOfDoses[patient.typeOfEvent]
       : Math.min(Math.max(nbDoses, 0), 500);
@@ -760,9 +826,11 @@ var toolModule = (function () {
   }
 
   function handlePriceChange(table, input) {
+    // document.querySelector(".has_error").classList.remove("has_error_hide");
     var dataKey = input.getAttribute('data-key');
+   
     var pricePerMg = parseFloat(input.value);
-
+ 
     hospitalData.forEach(function (patient) {
       patient[dataKey].pricePerMg = pricePerMg;
 
