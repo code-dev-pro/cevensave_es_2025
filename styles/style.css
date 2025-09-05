@@ -407,6 +407,19 @@ select[name='presentation'] option:checked {
   margin-top: 0;
 }
 
+#table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(2),
+#table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(3),
+#table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(4){
+  background-color: #fce7e2
+}
+
+#table_calculator_tbody tr.total_info_tr td:nth-child(1),
+#table_calculator_tbody tr.total_info_tr td:nth-child(2),
+#table_calculator_tbody tr.total_info_tr td:nth-child(3)
+{
+  border: none;
+}
+
 table {
   position: relative;
   border-collapse: collapse;
@@ -986,7 +999,9 @@ sup {
 }
 
 
-
+.error {
+  border: 2px solid #D6412B!important;
+}
 .has_error {
   color: #D6412B;
   opacity: 1;
@@ -994,3 +1009,4 @@ sup {
 .has_error_hide{
   opacity: 0;
 }
+

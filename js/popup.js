@@ -166,7 +166,7 @@ var popupModule = (function () {
     var btn = document.getElementById("add_row_in_calculator");
     if (!btn) return;
     var count = getDataRowsCount();
-    console.log(count);
+   
     var disabled = count >= maxRow;
 
     btn.toggleAttribute("disabled", disabled);
@@ -290,7 +290,7 @@ calculateRowAndRender(tr);
                   </td>
                   </tr>
 
-                  <tr>
+                  <tr class="total_info_tr">
                   <td></td>
                   <td></td>
                   <td></td>
