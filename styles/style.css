@@ -40,7 +40,7 @@
 
 body,
 html {
-  background: #f4f7ff;
+  background: #fff;
 
   overflow: hidden;
 }
@@ -565,7 +565,7 @@ td {
 
 #table_wrapper {
   width: 100%;
-  height: 600px;
+  height: 575px;
   overflow: hidden;
   touch-action: auto;
   z-index: 100;
@@ -716,8 +716,10 @@ td {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  background: #f4f7ff;
   /* width: 100vw; */
   justify-content: space-between;
+  overflow: hidden;
 }
 
 /* HEADER */
@@ -731,7 +733,7 @@ td {
 
 #header_img {
   position: absolute;
-  top: -100px;
+  top: -70px;
   left: 0;
   z-index: 0;
 }
@@ -759,7 +761,7 @@ td {
   align-items: flex-end;
   z-index: 2;
   user-select: none;
-  top: -75px;
+  top: 0px;
   position: relative;
 }
 
@@ -787,8 +789,9 @@ td {
 /* FOOTER */
 #footer {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
+
   width: 100%;
   position: relative;
   left: 0;
