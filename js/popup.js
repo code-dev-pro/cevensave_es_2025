@@ -77,17 +77,17 @@ var popupModule = (function () {
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="body_weight" required="true" data-error="" data-error-visible="true" min="10" max="300" value="70" class="input">
+      ` type="number" name="frequency" required="true" data-error="" data-error-visible="true" min="1" max="300" value="" class="input">
                   </td>
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="body_weight" required="true" data-error="" data-error-visible="true" min="10" max="300" value="1" class="input">
+      ` type="number" name="from" required="true" data-error="" data-error-visible="true" min="1" max="300" value="1" class="input">
                   </td>
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="body_weight" required="true" data-error="" data-error-visible="true" min="10" max="300" value="3" class="input">
+      ` type="number" name="to" required="true" data-error="" data-error-visible="true" min="1" max="300" value="2" class="input">
                   </td>
                   <td>
                   <div data-row=` +
@@ -268,9 +268,9 @@ calculateRowAndRender(tr);
     <tr>
     <th>Periodo</th>
      <th>Frecuencia (cada X horas)</th>
-     <th>Desde el dia</th>
-     <th>Hasta el dia</th>
-     <th>Numéro de dosis</th>
+     <th>Desde el día</th>
+     <th>Hasta el día</th>
+     <th>Número de dosis</th>
     </tr>
     </thread>    
     </table>
@@ -280,7 +280,7 @@ calculateRowAndRender(tr);
                   ${htmlTemplateRow(1)}
                   <tr class="col_add_row">
                   <td class="col_1 col_rowspan">
-                  <button id="add_row_in_calculator" class="add_row"><img src="./assets/medias/icon_mini.png" alt="" width="50" height="50"></button>
+                  <button id="add_row_in_calculator" class="add_row_in_calculator"><img src="./assets/medias/icon_mini.png" alt="" width="50" height="50"></button>
                   </td>
                   <td></td>
                   <td></td>

@@ -519,7 +519,7 @@ td {
   border-right: none;
 }
 
-.add_row {
+.add_row, .add_row_in_calculator {
   background-image: url(../assets/medias/rond_rouge.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -532,7 +532,9 @@ td {
   align-items: center;
   text-align: center;
   margin: 0 auto;
+ 
 }
+
 
 .tools_legend {
   display: flex;
