@@ -409,14 +409,13 @@ select[name='presentation'] option:checked {
 
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(2),
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(3),
-#table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(4){
+#table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(4) {
   background-color: #fce7e2
 }
 
 #table_calculator_tbody tr.total_info_tr td:nth-child(1),
 #table_calculator_tbody tr.total_info_tr td:nth-child(2),
-#table_calculator_tbody tr.total_info_tr td:nth-child(3)
-{
+#table_calculator_tbody tr.total_info_tr td:nth-child(3) {
   border: none;
 }
 
@@ -519,7 +518,8 @@ td {
   border-right: none;
 }
 
-.add_row, .add_row_in_calculator {
+.add_row,
+.add_row_in_calculator {
   background-image: url(../assets/medias/rond_rouge.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -532,7 +532,7 @@ td {
   align-items: center;
   text-align: center;
   margin: 0 auto;
- 
+
 }
 
 
@@ -706,9 +706,9 @@ td {
   flex-direction: column;
   width: 1920px;
   height: 1080px;
-  position:absolute;
-  left:50%;
-  top:50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   /* width: 100vw; */
   justify-content: space-between;
@@ -725,7 +725,7 @@ td {
 
 #header_img {
   position: absolute;
-  top: 0;
+  top: -100px;
   left: 0;
   z-index: 0;
 }
@@ -753,6 +753,8 @@ td {
   align-items: flex-end;
   z-index: 2;
   user-select: none;
+  top: -75px;
+  position: relative;
 }
 
 #logo p {
@@ -955,17 +957,18 @@ sup {
   font-size: 14px;
   text-align: left;
   margin-left: 20px;
- 
+
 }
+
 .resumen_pdf_button_text sup {
- font-size: 12px;
+  font-size: 12px;
 }
 
 #resumen_pdf_button {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  text-decoration: none!important;
+  text-decoration: none !important;
 
 }
 
@@ -999,21 +1002,23 @@ sup {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 #table_calculator thead tr {
   background-color: #5c6772;
-    border-left: 1px solid #b0b7be;
-    border-right: 1px solid #b0b7be;
+  border-left: 1px solid #b0b7be;
+  border-right: 1px solid #b0b7be;
 }
 
 
 .error {
-  border: 2px solid #D6412B!important;
+  border: 2px solid #D6412B !important;
 }
+
 .has_error {
   color: #D6412B;
   opacity: 1;
 }
-.has_error_hide{
+
+.has_error_hide {
   opacity: 0;
 }
-
