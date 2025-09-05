@@ -7,7 +7,7 @@ var resizeModule = (function () {
   var game = {
     docElement: document.documentElement,
     docBody: document.getElementsByTagName("body")[0],
-    appContainer: document.getElementById("app"),
+    appContainer: document.getElementById("wrapper_app"),
   };
 
   function setResize() {

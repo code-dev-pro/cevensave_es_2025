@@ -10,6 +10,7 @@ var CalculateurModule = (function () {
     document.body.classList.add('hasHover');
   }
 
+  resizeModule.init();
   languageModule.init();
   fullscreenModule.init();
   welcomeModule.init();
