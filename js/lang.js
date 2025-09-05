@@ -58,6 +58,7 @@ var languageModule = (function () {
       default_view: "Default View",
       clear_button: "Clear All",
       tools_legend_first: "Orange cells are modifiable",
+      tools_legend_first_2: "Orange cells are modifiable",
       tools_legend_second:
         "* Patients are considered as adults or adolescents (12 years of age and older)",
       tools_legend_third: "** Average prices observed on April, 1, 2023.",
@@ -151,7 +152,7 @@ var languageModule = (function () {
       `,
     },
     de: {
-      warning_message:"",
+      warning_message: "",
       // home page
       overview_tool: "Überblick über das Tool",
       overview_tool_text:
@@ -182,6 +183,7 @@ var languageModule = (function () {
       default_view: "Standardansicht",
       clear_button: "Alle löschen",
       tools_legend_first: "Orangefarbene Zellen sind veränderbar",
+      tools_legend_first_2: "Orangefarbene Zellen sind veränderbar",
       tools_legend_second:
         "* Patienten gelten als Erwachsene oder Jugendliche (12 Jahre und älter)",
       tools_legend_third:
@@ -227,6 +229,7 @@ var languageModule = (function () {
       outputright_notes:
         "* Wenn die Zahl nach dem Komma 5 oder mehr beträgt, wird die Zahl aufgerundet.",
       tool_button_text_2: "Werkzeug",
+      
 
       // popup
       popup_1_title: "Referenzen",
@@ -301,6 +304,7 @@ var languageModule = (function () {
       default_view: "Vista por defecto",
       clear_button: "Borrar todo",
       tools_legend_first: "Las celdas naranjas son modificables",
+      tools_legend_first_2: "Las celdas naranjas son modificables",
       tools_legend_second:
         "* Los pacientes se consideran adultos o adolescentes (a partir de 12 años)",
       tools_legend_third: "** Precios medios observados el 1 de abril de 2023.",
@@ -343,7 +347,8 @@ var languageModule = (function () {
       outputright_notes:
         "* Si el número después del punto decimal es igual a 5 o más, el número se redondea hacia arriba.",
       tool_button_text_2: "Herramienta",
-      warning_message: "Por favor, complete todos los campos obligatorios para obtener un resultado.",
+      warning_message:
+        "Por favor, complete todos los campos obligatorios para obtener un resultado.",
 
       // popup
       popup_1_title: "Calculadora de dosis​",
@@ -413,6 +418,7 @@ var languageModule = (function () {
     dom.default_view = document.getElementById('default_view');
     dom.clear_button = document.getElementById('clear_button');
     dom.tools_legend_first = document.getElementById('tools_legend--first');
+    dom.tools_legend_first_2 = document.getElementById('tools_legend--first_2');
     dom.tools_legend_second = document.getElementById('tools_legend--second');
     // dom.tools_legend_third = document.getElementById('tools_legend--third');
     dom.output_button_text = document.getElementById('output_button_text');
@@ -486,6 +492,8 @@ var languageModule = (function () {
     clear_button.innerHTML = langObject.clear_button;
     dom.tools_legend_first.innerHTML = langObject.tools_legend_first;
     dom.tools_legend_second.innerHTML = langObject.tools_legend_second;
+    dom.tools_legend_first_2.innerHTML = langObject.tools_legend_first_2;
+    
     // dom.tools_legend_third.innerHTML = langObject.tools_legend_third;
     output_button_text.innerHTML = langObject.output_button_text;
     // tool page table

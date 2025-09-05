@@ -557,6 +557,12 @@ td {
   background-color: #fce7e2;
 }
 
+.tools_legend_2 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
 #table_wrapper {
   width: 100%;
   height: 600px;
