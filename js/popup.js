@@ -8,8 +8,8 @@ var popupModule = (function () {
   function init() {
     console.log("INIT::", nameModule);
     setPopups();
-    scrollI("#scrollContainer", "elevatorContainer", function () {});
-    window.addEventListener("resize", refreshIScroll);
+    // scrollI("#scrollContainer", "elevatorContainer", function () {});
+    // window.addEventListener("resize", refreshIScroll);
   }
 
   function setPopups() {
