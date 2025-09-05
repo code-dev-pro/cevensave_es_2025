@@ -49,7 +49,7 @@ button {
   font-family: 'Open Sans', sans-serif;
 }
 
-@media (-webkit-device-pixel-ratio: 1.25) {
+/* @media (-webkit-device-pixel-ratio: 1.25) {
   #wrapper_app {
     zoom: 0.8;
   }
@@ -59,7 +59,7 @@ button {
   #wrapper_app {
     zoom: 0.6;
   }
-}
+} */
 
 input {
   text-align: center;
