@@ -2,6 +2,7 @@ var popupModule = (function () {
   var nameModule = "popup";
   popupsTargets = document.querySelectorAll("[data-target]");
   popupsDismiss = document.querySelectorAll("[data-dismiss]");
+
   var maxRow = 7;
   var myScroll;
 
@@ -21,6 +22,7 @@ var popupModule = (function () {
           initEventAddRow();
           attachDelegatedListeners();
           updateTotal();
+         
         }
         document.getElementById(target).classList.add("show");
         var sections = document.querySelectorAll("section");
@@ -77,7 +79,7 @@ var popupModule = (function () {
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="frequency" required="true" data-error="" data-error-visible="true" min="1" max="300" value="" class="input">
+      ` type="number" name="frequency" required="true" data-error="" data-error-visible="true" min="1" max="24" value="" class="input">
                   </td>
                   <td>
                   <input data-row=` +
@@ -111,10 +113,15 @@ var popupModule = (function () {
     // Déterminer la valeur par défaut de "Desde el día" = (Hasta de la ligne précédente) + 1
     var existingRows = Array.from(tbody.querySelectorAll("tr")).filter(
       function (tr) {
-        return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+        return (
+          !tr.classList.contains("col_add_row") &&
+          !tr.querySelector(".total_info")
+        );
       }
     );
-    var prevRow = existingRows.length ? existingRows[existingRows.length - 1] : null;
+    var prevRow = existingRows.length
+      ? existingRows[existingRows.length - 1]
+      : null;
     var nextFromValue = "";
     if (prevRow) {
       var prevTds = prevRow.querySelectorAll("td");
@@ -166,7 +173,7 @@ var popupModule = (function () {
     var btn = document.getElementById("add_row_in_calculator");
     if (!btn) return;
     var count = getDataRowsCount();
-   
+
     var disabled = count >= maxRow;
 
     btn.toggleAttribute("disabled", disabled);
@@ -215,7 +222,10 @@ var popupModule = (function () {
     if (!tbody) return;
     var sum = 0;
     var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (tr) {
-      return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+      return (
+        !tr.classList.contains("col_add_row") &&
+        !tr.querySelector(".total_info")
+      );
     });
     rows.forEach(function (tr) {
       // Si la cellule résultat existe et contient une valeur, on l'utilise, sinon on recalcule
@@ -226,7 +236,8 @@ var popupModule = (function () {
       sum += Number(n) || 0;
     });
 
-    var totalEl = tbody.parentElement && tbody.parentElement.querySelector(".total");
+    var totalEl =
+      tbody.parentElement && tbody.parentElement.querySelector(".total");
     if (totalEl) totalEl.textContent = String(sum);
   }
 
@@ -236,8 +247,17 @@ var popupModule = (function () {
 
     // Un seul listener pour tous les inputs numériques (dynamiques inclus)
     tbody.addEventListener("input", (e) => {
-      console.log(e.target);
+     
+      console.log(e.target.name);
       if (!e.target.matches("input.input[type='number']")) return;
+
+      if(e.target.name === "frequency") {
+        e.target.addEventListener("beforeinput", (e) => {
+          if (e.data && /[.,]/.test(e.data)) {
+            e.preventDefault();
+          }
+        });
+      }
 
       var tr = e.target.closest("tr");
       if (!tr || tr.classList.contains("col_add_row")) return; // ignorer la ligne-bouton
@@ -248,12 +268,37 @@ var popupModule = (function () {
 
       // TODO: calcule le résultat pour la ligne si nécessaire
       // tr.querySelector(".result_dosis")?.textContent = monCalcul(values);
-calculateRowAndRender(tr);
+      calculateRowAndRender(tr);
       // TODO: recalcule le total global si nécessaire
       // updateTotal();
-       updateTotal();
+      updateTotal();
     });
   }
+
+  // function initEventInput() {
+  //   var tableCalculator = document.getElementById("table_calculator_tbody");
+  //   if (!tableCalculator) return;
+  //   var frequencyInputs = tableCalculator.querySelectorAll(
+  //     "input[name=frequency]"
+  //   );
+  //   for (var i = 0; i < frequencyInputs.length; i++) {
+  //     //  bodyWeightInputs[i].addEventListener("blur", function () {
+  //     //    handleBodyWeightChange(table, this);
+  //     //  });
+
+  //     frequencyInputs[i].addEventListener("beforeinput", (e) => {
+  //       if (e.data && /[.,]/.test(e.data)) {
+  //         e.preventDefault();
+  //       }
+  //     });
+
+  //     //  bodyWeightInputs[i].addEventListener("keyup", function (event) {
+  //     //    if (event.keyCode === 13) {
+  //     //      handleBodyWeightChange(table, this);
+  //     //    }
+  //     //  });
+  //   }
+  // }
 
   function initEventAddRow() {
     var button = document.getElementById("add_row_in_calculator");
