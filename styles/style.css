@@ -1032,3 +1032,8 @@ sup {
 .has_error_hide {
   opacity: 0;
 }
+
+#table_calculator_tbody .col_add_row td:first-child {
+  background-color: #fff;
+}
+
