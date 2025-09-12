@@ -41,9 +41,9 @@
 body,
 html {
   /* Fallback solid color */
-  background: #fff;
+  background: #f4f7ff;
   /* Vertical gradient: from white (top) to #f4f7ff (bottom) */
-  background: linear-gradient(to bottom, #ffffff 0%, #f4f7ff 100%);
+  /* background: linear-gradient(to bottom, #ffffff 0%, #f4f7ff 100%); */
   overflow: hidden;
 }
 
