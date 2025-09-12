@@ -1025,6 +1025,7 @@ sup {
 
 .has_error {
   color: #D6412B;
+  font-weight: bold;
   opacity: 1;
 }
 
