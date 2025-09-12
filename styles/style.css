@@ -1037,6 +1037,8 @@ sup {
   color: #D6412B;
   font-weight: bold;
   opacity: 1;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .has_error_hide {
