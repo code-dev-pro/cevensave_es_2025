@@ -504,6 +504,13 @@ var toolModule = (function () {
         handleBodyWeightChange(table, this);
       });
 
+      bodyWeightInputs[i].addEventListener("beforeinput", (e) => {
+        // e.data peut être null (suppression, etc.)
+        if (e.data && /[.,]/.test(e.data)) {
+          e.preventDefault();
+        }
+      });
+
       bodyWeightInputs[i].addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
           handleBodyWeightChange(table, this);
@@ -1263,9 +1270,9 @@ var toolModule = (function () {
     input.setAttribute("type", "number");
     input.setAttribute("name", "body_weight");
     input.setAttribute("required", true);
-    input.setAttribute("data-error", "Please enter a body weight");
+    input.setAttribute("data-error", "Por favor, introduzca un peso corporal");
     input.setAttribute("data-error-visible", "true");
-
+    input.setAttribute("step", 1);
     input.setAttribute("min", 10);
     input.setAttribute("max", 300);
     input.setAttribute("value", data.bodyWeight);
@@ -1282,7 +1289,7 @@ var toolModule = (function () {
     select.setAttribute("data-index", data.patientIndex - 1);
     select.setAttribute("name", "non_replacement");
     select.setAttribute("required", true);
-    select.setAttribute("data-error", "Please select a non replacement");
+    select.setAttribute("data-error", "Por favor seleccione un no reemplazo");
     select.setAttribute("data-error-visible", "true");
     selectNonReplacement.forEach(function (option) {
       var optionElement = document.createElement("option");
@@ -1305,7 +1312,7 @@ var toolModule = (function () {
     select.setAttribute("data-index", data.patientIndex - 1);
     select.setAttribute("name", "type_of_event");
     select.setAttribute("required", true);
-    select.setAttribute("data-error", "Please select a type of event");
+    select.setAttribute("data-error", "Por favor seleccione un tipo de evento");
     select.setAttribute("data-error-visible", "true");
     select.classList.add("select");
 
@@ -1341,7 +1348,7 @@ var toolModule = (function () {
     input.setAttribute("type", "number");
     input.setAttribute("name", "event_per_patient");
     input.setAttribute("required", true);
-    input.setAttribute("data-error", "Please enter a number of event");
+    input.setAttribute("data-error", "Por favor introduzca un número de eventos");
     input.setAttribute("data-error-visible", "true");
 
     input.setAttribute("min", 1);
@@ -1388,7 +1395,7 @@ var toolModule = (function () {
     input.type = "number";
     input.name = "initial_dose";
     input.required = true;
-    input.dataset.error = "Please enter an initial dose";
+    input.dataset.error = "Por favor introduzca una dosis inicial";
     input.dataset.errorVisible = true;
     input.min = 0;
     input.max = product === "apcc" ? 200 : 200000;
@@ -1419,7 +1426,7 @@ var toolModule = (function () {
     input.type = "number";
     input.name = "subsequent_doses";
     input.required = true;
-    input.dataset.error = "Please enter a number of dose";
+    input.dataset.error = "Por favor introduzca un número de dosis";
     input.dataset.errorVisible = true;
     input.min = 0;
     input.max = product === "apcc" ? 200 : 200000;
@@ -1449,7 +1456,7 @@ var toolModule = (function () {
     input.type = "number";
     input.name = "nb_of_doses";
     input.required = true;
-    input.dataset.error = "Please enter a number of subsequent doses";
+    input.dataset.error = "Por favor introduzca un número de dosis";
     input.dataset.errorVisible = true;
     input.min = 0;
     input.max = 500;
@@ -1477,7 +1484,7 @@ var toolModule = (function () {
     input.type = "number";
     input.name = "price_per_mg";
     input.required = true;
-    input.dataset.error = "Please enter a price";
+    input.dataset.error = "Por favor introduzca un precio";
     input.dataset.errorVisible = true;
     input.min = 0;
     input.max = 5000;
