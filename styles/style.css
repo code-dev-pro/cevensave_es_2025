@@ -1017,7 +1017,7 @@ sup {
   transform: translate(-50%, -50%);
 }
 
-#table_calculator thead tr {
+#table_calculator thead tr:not(:last-child) {
   background-color: #5c6772;
   border-left: 1px solid #b0b7be;
   border-right: 1px solid #b0b7be;
@@ -1042,3 +1042,27 @@ sup {
   background-color: #fff;
 }
 
+.result_dosis {
+  font-weight: bold;
+}
+
+#table_calculator_thead tr th:last-child, #table_calculator_tbody tr td:last-child {
+  width: 80px!important;
+}
+ #table_calculator_tbody tr:not(:last-child) td:nth-child(6) {
+  border: 1px solid #b0b7be;
+}
+#table_calculator_tbody tr:nth-child(1) td:nth-child(6) {
+   border: none
+ }
+.col_add_row td:nth-child(6),.total_info_tr td:nth-child(6) {
+   border: none!important;
+}
+
+#table_calculator_thead th:last-child {
+  background-color: transparent!important;
+  border: none!important;
+}
+.col_action{
+  cursor: pointer;
+}

@@ -27,7 +27,6 @@ var popupModule = (function () {
           initResetButton();
           updateAddRowState();
           updateTotal();
-         
         }
         document.getElementById(target).classList.add("show");
         var sections = document.querySelectorAll("section");
@@ -110,13 +109,25 @@ var popupModule = (function () {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return { rows: [] };
     var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (tr) {
-      return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+      return (
+        !tr.classList.contains("col_add_row") &&
+        !tr.querySelector(".total_info")
+      );
     });
     var data = rows.map(function (tr) {
       var tds = tr.querySelectorAll("td");
-      var freq = (tds[1] && tds[1].querySelector("input")) ? tds[1].querySelector("input").value : "";
-      var from = (tds[2] && tds[2].querySelector("input")) ? tds[2].querySelector("input").value : "";
-      var to = (tds[3] && tds[3].querySelector("input").value) ? tds[3].querySelector("input").value : "";
+      var freq =
+        tds[1] && tds[1].querySelector("input")
+          ? tds[1].querySelector("input").value
+          : "";
+      var from =
+        tds[2] && tds[2].querySelector("input")
+          ? tds[2].querySelector("input").value
+          : "";
+      var to =
+        tds[3] && tds[3].querySelector("input").value
+          ? tds[3].querySelector("input").value
+          : "";
       return { frequency: freq, from: from, to: to };
     });
     return { rows: data };
@@ -156,7 +167,10 @@ var popupModule = (function () {
 
     // Nettoie les lignes de données actuelles uniquement si on va restaurer
     Array.from(tbody.querySelectorAll("tr")).forEach(function (tr) {
-      if (!tr.classList.contains("col_add_row") && !tr.querySelector(".total_info")) {
+      if (
+        !tr.classList.contains("col_add_row") &&
+        !tr.querySelector(".total_info")
+      ) {
         tr.remove();
       }
     });
@@ -204,6 +218,11 @@ var popupModule = (function () {
       index +
       ` class="result_dosis">/</div>
                   </td>
+                  <td class="col_action">` +
+      (index >= 2
+        ? `<img src="./assets/medias/icon_mini_trash.png" alt="delete" width="50" height="50" class="trash">`
+        : ``) +
+      `</td>
                   
                   </tr>`
     );
@@ -268,6 +287,7 @@ var popupModule = (function () {
     calculateRowAndRender(tr);
     updateTotal();
     saveTableState();
+    updateDeleteIcons();
   }
   function getDataRowsCount() {
     var tbody = document.getElementById("table_calculator_tbody");
@@ -355,29 +375,23 @@ var popupModule = (function () {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return;
 
-
     tbody.addEventListener("beforeinput", (e) => {
-      
       if (e.data && /[.,]/.test(e.data)) {
         e.preventDefault();
       }
-      if(e.target.name === "frequency") {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      if (e.target.name === "frequency") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, "");
       }
-      if(e.target.name === "from") {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      if (e.target.name === "from") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, "");
       }
-      if(e.target.name === "to") {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      if (e.target.name === "to") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, "");
       }
     });
     // Un seul listener pour tous les inputs numériques (dynamiques inclus)
     tbody.addEventListener("input", (e) => {
-      
-      
       if (!e.target.matches("input.input[type='number']")) return;
-
-      
 
       var tr = e.target.closest("tr");
       if (!tr || tr.classList.contains("col_add_row")) return;
@@ -389,6 +403,35 @@ var popupModule = (function () {
       // TODO: recalcule le total global si nécessaire
       // updateTotal();
       updateTotal();
+      saveTableState();
+    });
+
+    // Suppression d'une ligne via l'icône poubelle
+    tbody.addEventListener("click", function (e) {
+      var target = e.target;
+      if (!(target && target.classList && target.classList.contains("trash")))
+        return;
+      var tr = target.closest("tr");
+      if (!tr) return;
+      // Supprime la ligne
+      tr.remove();
+      // Réindexe les libellés "Periodo X"
+      var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (
+        row
+      ) {
+        return (
+          !row.classList.contains("col_add_row") &&
+          !row.querySelector(".total_info")
+        );
+      });
+      rows.forEach(function (row, i) {
+        var firstTd = row.querySelector("td");
+        if (firstTd) firstTd.textContent = "Periodo " + (i + 1);
+      });
+      // MAJ UI et persistance
+      updateTotal();
+      updateAddRowState();
+      updateDeleteIcons();
       saveTableState();
     });
   }
@@ -431,6 +474,7 @@ var popupModule = (function () {
      <th>Desde el día</th>
      <th>Hasta el día</th>
      <th>Número de dosis</th>
+     <th></th>
     </tr>
     </thread>    
     </table>
@@ -448,6 +492,7 @@ var popupModule = (function () {
                   <td>
                   <div></div>
                   </td>
+                  <td></td>
                   </tr>
 
                   <tr class="total_info_tr">
@@ -460,6 +505,7 @@ var popupModule = (function () {
                   <td>
                   <div class="total">/</div>
                   </td>
+                  <td></td>
                   </tr>
 
                   </tbody>
@@ -467,6 +513,36 @@ var popupModule = (function () {
                 </table>
               </div>
     `;
+  }
+
+  // Met à jour l'affichage des icônes poubelle selon la position des lignes (>= 2)
+  function updateDeleteIcons() {
+    var tbody = document.getElementById("table_calculator_tbody");
+    if (!tbody) return;
+    var dataRows = Array.from(tbody.querySelectorAll("tr")).filter(function (
+      tr
+    ) {
+      return (
+        !tr.classList.contains("col_add_row") &&
+        !tr.querySelector(".total_info")
+      );
+    });
+    dataRows.forEach(function (tr, idx) {
+      var tds = tr.querySelectorAll("td");
+      var actionCell = tds[5];
+      if (!actionCell) return;
+      // Nettoie la cellule
+      actionCell.innerHTML = "";
+      if (idx >= 1) {
+        var img = document.createElement("img");
+        img.src = "./assets/medias/icon_mini_trash.png";
+        img.alt = "delete";
+        img.width = 50;
+        img.height = 50;
+        img.className = "trash";
+        actionCell.appendChild(img);
+      }
+    });
   }
 
   return {
