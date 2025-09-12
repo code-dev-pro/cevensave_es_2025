@@ -379,7 +379,8 @@ select[name='presentation'] option:checked {
 }
 
 #default_view,
-#clear_button {
+#clear_button,
+#reset_calculator {
   width: 220px;
   height: 54px;
   padding: 18px 40px;
@@ -392,6 +393,10 @@ select[name='presentation'] option:checked {
   text-align: center;
   color: #fff;
   cursor: pointer;
+}
+
+#reset_calculator {
+  justify-self: flex-end;
 }
 
 #clear_button {

@@ -24,6 +24,7 @@ var popupModule = (function () {
           restoreTableState();
           initEventAddRow();
           attachDelegatedListeners();
+          initResetButton();
           updateAddRowState();
           updateTotal();
          
@@ -76,6 +77,29 @@ var popupModule = (function () {
       interactiveScrollbars: true,
       onBeforeScrollStart: function (e) {},
       onScrollStart: function (e) {},
+    });
+  }
+
+  // Bouton Reiniciar (réinitialisation du tableau)
+  function resetCalculator() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+    // Reconstruire le contenu par défaut
+    initCalculator();
+    // Réattacher les listeners sur les nouveaux éléments
+    initEventAddRow();
+    attachDelegatedListeners();
+    initResetButton();
+    updateAddRowState();
+    updateTotal();
+  }
+
+  function initResetButton() {
+    var btn = document.getElementById("reset_calculator");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      resetCalculator();
     });
   }
 
@@ -398,7 +422,8 @@ var popupModule = (function () {
   function initCalculator() {
     document.getElementById(
       "popup_1_text"
-    ).innerHTML = `<table class='tool_content--table' id='table_calculator'>
+    ).innerHTML = `<div class="table_actions"><button id="reset_calculator" class="reset_calculator">Reiniciar</button></div>
+    <table class='tool_content--table' id='table_calculator'>
    <thead id="table_calculator_thead">
     <tr>
     <th>Periodo</th>
