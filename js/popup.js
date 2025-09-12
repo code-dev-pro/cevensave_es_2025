@@ -79,17 +79,17 @@ var popupModule = (function () {
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="frequency" required="true" data-error="" data-error-visible="true" min="1" max="24" value="" class="input">
+      ` type="number" name="frequency" inputmode="numeric" required="true" step="1" data-error="" data-error-visible="true" min="1" max="24" value="" class="input">
                   </td>
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="from" required="true" data-error="" data-error-visible="true" min="1" max="300" value="1" class="input">
+      ` type="number" name="from" inputmode="numeric" required="true" step="1" data-error="" data-error-visible="true" min="1" max="99" value="1" class="input">
                   </td>
                   <td>
                   <input data-row=` +
       index +
-      ` type="number" name="to" required="true" data-error="" data-error-visible="true" min="1" max="300" value="2" class="input">
+      ` type="number" name="to" inputmode="numeric" required="true" step="1" data-error="" data-error-visible="true" min="1" max="99" value="2" class="input">
                   </td>
                   <td>
                   <div data-row=` +
@@ -245,19 +245,29 @@ var popupModule = (function () {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return;
 
+
+    tbody.addEventListener("beforeinput", (e) => {
+      
+      if (e.data && /[.,]/.test(e.data)) {
+        e.preventDefault();
+      }
+      if(e.target.name === "frequency") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      }
+      if(e.target.name === "from") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      }
+      if(e.target.name === "to") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      }
+    });
     // Un seul listener pour tous les inputs numériques (dynamiques inclus)
     tbody.addEventListener("input", (e) => {
      
-      console.log(e.target.name);
+     
       if (!e.target.matches("input.input[type='number']")) return;
 
-      if(e.target.name === "frequency") {
-        e.target.addEventListener("beforeinput", (e) => {
-          if (e.data && /[.,]/.test(e.data)) {
-            e.preventDefault();
-          }
-        });
-      }
+      
 
       var tr = e.target.closest("tr");
       if (!tr || tr.classList.contains("col_add_row")) return; // ignorer la ligne-bouton
