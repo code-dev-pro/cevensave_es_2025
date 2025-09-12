@@ -5,6 +5,7 @@ var popupModule = (function () {
 
   var maxRow = 7;
   var myScroll;
+  var STORAGE_KEY = "popup_calculator_state";
 
   function init() {
     console.log("INIT::", nameModule);
@@ -19,8 +20,11 @@ var popupModule = (function () {
         var target = this.dataset.target;
         if (target === "popup_1") {
           initCalculator();
+          // Restaure l'état sauvegardé (si présent)
+          restoreTableState();
           initEventAddRow();
           attachDelegatedListeners();
+          updateAddRowState();
           updateTotal();
          
         }
@@ -40,6 +44,8 @@ var popupModule = (function () {
     for (var i = 0; i < popupsDismiss.length; i++) {
       popupsDismiss[i].addEventListener("click", function () {
         var target = this.dataset.dismiss;
+        // Sauvegarde l'état actuel avant de fermer
+        saveTableState();
         document.getElementById(target).classList.remove("show");
         var sections = document.querySelectorAll("section");
         for (var i = 0; i < sections.length; i++) {
@@ -73,6 +79,84 @@ var popupModule = (function () {
     });
   }
 
+  // -----------------------------
+  // Persistance en localStorage
+  // -----------------------------
+  function getTableState() {
+    var tbody = document.getElementById("table_calculator_tbody");
+    if (!tbody) return { rows: [] };
+    var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (tr) {
+      return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+    });
+    var data = rows.map(function (tr) {
+      var tds = tr.querySelectorAll("td");
+      var freq = (tds[1] && tds[1].querySelector("input")) ? tds[1].querySelector("input").value : "";
+      var from = (tds[2] && tds[2].querySelector("input")) ? tds[2].querySelector("input").value : "";
+      var to = (tds[3] && tds[3].querySelector("input").value) ? tds[3].querySelector("input").value : "";
+      return { frequency: freq, from: from, to: to };
+    });
+    return { rows: data };
+  }
+
+  function saveTableState() {
+    try {
+      var state = getTableState();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // Silencieux: localStorage peut être indisponible (mode privé, etc.)
+    }
+  }
+
+  function restoreTableState() {
+    var raw = null;
+    try {
+      raw = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {}
+    if (!raw) return;
+    var parsed = null;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      return;
+    }
+    if (!parsed || !Array.isArray(parsed.rows)) return;
+
+    var tbody = document.getElementById("table_calculator_tbody");
+    if (!tbody) return;
+
+    var rows = parsed.rows.slice(0, maxRow); // respect du max
+    if (rows.length === 0) {
+      // Aucun état sauvegardé: ne pas effacer la ligne par défaut
+      return;
+    }
+
+    // Nettoie les lignes de données actuelles uniquement si on va restaurer
+    Array.from(tbody.querySelectorAll("tr")).forEach(function (tr) {
+      if (!tr.classList.contains("col_add_row") && !tr.querySelector(".total_info")) {
+        tr.remove();
+      }
+    });
+
+    var addRowTr = tbody.querySelector(".col_add_row");
+    rows.forEach(function (row, idx) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = htmlTemplateRow(idx + 1);
+      tbody.insertBefore(tr, addRowTr);
+      try {
+        var tds = tr.querySelectorAll("td");
+        var freqInput = tds[1] && tds[1].querySelector("input");
+        var fromInput = tds[2] && tds[2].querySelector("input");
+        var toInput = tds[3] && tds[3].querySelector("input");
+        if (freqInput) freqInput.value = row.frequency || "";
+        if (fromInput) fromInput.value = row.from || "";
+        if (toInput) toInput.value = row.to || "";
+        // Calculer le résultat pour cette ligne
+        calculateRowAndRender(tr);
+      } catch (e) {}
+    });
+    updateTotal();
+  }
+
   function htmlTemplateRow(index) {
     return (
       `<td>Periodo ${index}</td>
@@ -96,6 +180,7 @@ var popupModule = (function () {
       index +
       ` class="result_dosis">/</div>
                   </td>
+                  
                   </tr>`
     );
   }
@@ -158,6 +243,7 @@ var popupModule = (function () {
     // Calcul initial de la ligne ajoutée + MAJ total
     calculateRowAndRender(tr);
     updateTotal();
+    saveTableState();
   }
   function getDataRowsCount() {
     var tbody = document.getElementById("table_calculator_tbody");
@@ -263,31 +349,25 @@ var popupModule = (function () {
     });
     // Un seul listener pour tous les inputs numériques (dynamiques inclus)
     tbody.addEventListener("input", (e) => {
-     
-     
+      
+      
       if (!e.target.matches("input.input[type='number']")) return;
 
       
 
       var tr = e.target.closest("tr");
-      if (!tr || tr.classList.contains("col_add_row")) return; // ignorer la ligne-bouton
-
-      // Exemple: récupérer les valeurs de la ligne et recalculer
+      if (!tr || tr.classList.contains("col_add_row")) return;
+      // Recalcule la ligne et met à jour le total
       var inputs = tr.querySelectorAll("input.input[type='number']");
       var values = Array.from(inputs).map((i) => Number(i.value) || 0);
-
-      // TODO: calcule le résultat pour la ligne si nécessaire
       // tr.querySelector(".result_dosis")?.textContent = monCalcul(values);
       calculateRowAndRender(tr);
       // TODO: recalcule le total global si nécessaire
       // updateTotal();
       updateTotal();
+      saveTableState();
     });
   }
-
-  // function initEventInput() {
-  //   var tableCalculator = document.getElementById("table_calculator_tbody");
-  //   if (!tableCalculator) return;
   //   var frequencyInputs = tableCalculator.querySelectorAll(
   //     "input[name=frequency]"
   //   );
