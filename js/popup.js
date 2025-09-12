@@ -27,6 +27,7 @@ var popupModule = (function () {
           initResetButton();
           updateAddRowState();
           updateTotal();
+          validateTableSequence();
         }
         document.getElementById(target).classList.add("show");
         var sections = document.querySelectorAll("section");
@@ -87,11 +88,14 @@ var popupModule = (function () {
     // Reconstruire le contenu par défaut
     initCalculator();
     // Réattacher les listeners sur les nouveaux éléments
-    initEventAddRow();
+  
+      initEventAddRow();
+   
     attachDelegatedListeners();
     initResetButton();
     updateAddRowState();
     updateTotal();
+    validateTableSequence();
   }
 
   function initResetButton() {
@@ -228,6 +232,7 @@ var popupModule = (function () {
     );
   }
   function addRow() {
+   
     var tbody = document.getElementById("table_calculator_tbody");
     var addRowTr = tbody.querySelector(".col_add_row"); // ligne contenant le bouton
 
@@ -288,6 +293,7 @@ var popupModule = (function () {
     updateTotal();
     saveTableState();
     updateDeleteIcons();
+    validateTableSequence();
   }
   function getDataRowsCount() {
     var tbody = document.getElementById("table_calculator_tbody");
@@ -404,6 +410,7 @@ var popupModule = (function () {
       // updateTotal();
       updateTotal();
       saveTableState();
+      validateTableSequence();
     });
 
     // Suppression d'une ligne via l'icône poubelle
@@ -433,33 +440,77 @@ var popupModule = (function () {
       updateAddRowState();
       updateDeleteIcons();
       saveTableState();
+      validateTableSequence();
     });
   }
-  //   var frequencyInputs = tableCalculator.querySelectorAll(
-  //     "input[name=frequency]"
-  //   );
-  //   for (var i = 0; i < frequencyInputs.length; i++) {
-  //     //  bodyWeightInputs[i].addEventListener("blur", function () {
-  //     //    handleBodyWeightChange(table, this);
-  //     //  });
 
-  //     frequencyInputs[i].addEventListener("beforeinput", (e) => {
-  //       if (e.data && /[.,]/.test(e.data)) {
-  //         e.preventDefault();
-  //       }
-  //     });
+  // Valide que "Desde el día" de la ligne courante soit > au "Hasta el día" de la ligne précédente
+  function validateTableSequence() {
+    var tbody = document.getElementById("table_calculator_tbody");
+    if (!tbody) return;
+    var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (tr) {
+      return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+    });
 
-  //     //  bodyWeightInputs[i].addEventListener("keyup", function (event) {
-  //     //    if (event.keyCode === 13) {
-  //     //      handleBodyWeightChange(table, this);
-  //     //    }
-  //     //  });
-  //   }
-  // }
+    var isValid = true;
+    var prevHasta = null;
+
+    // Nettoie les anciens états d'erreur
+    rows.forEach(function (tr) {
+      var tds = tr.querySelectorAll("td");
+      var desdeInput = tds[2] && tds[2].querySelector("input");
+      if (desdeInput) desdeInput.parentElement.classList.remove("error");
+    });
+
+    rows.forEach(function (tr, idx) {
+      var tds = tr.querySelectorAll("td");
+      var desdeInput = tds[2] && tds[2].querySelector("input");
+      var hastaInput = tds[3] && tds[3].querySelector("input");
+      var desde = desdeInput ? Number(desdeInput.value) : NaN;
+      var hasta = hastaInput ? Number(hastaInput.value) : NaN;
+
+      if (idx === 0) {
+        prevHasta = isFinite(hasta) ? hasta : null;
+        return;
+      }
+      if (isFinite(desde) && prevHasta !== null) {
+        if (!(desde > prevHasta)) {
+          isValid = false;
+          if (desdeInput) desdeInput.parentElement.classList.add("error");
+        }
+      }
+      prevHasta = isFinite(hasta) ? hasta : prevHasta;
+    });
+
+    var errorEl = document.getElementById("table_calc_error");
+    if (!errorEl) return;
+    if (isValid) {
+      errorEl.classList.add("hide");
+      errorEl.classList.remove("show");
+      errorEl.textContent = "";
+    } else {
+      errorEl.textContent = "El valor debe ser mayor que el valor anterior en la lista para que sea válido.";
+      errorEl.classList.remove("hide");
+      errorEl.classList.add("show");
+    }
+
+    // Désactive/active le bouton d'ajout si invalide
+    // var addBtn = document.getElementById("add_row_in_calculator");
+    // if (addBtn) addBtn.toggleAttribute("disabled", !isValid || getDataRowsCount() >= maxRow);
+  }
+ 
 
   function initEventAddRow() {
+   
     var button = document.getElementById("add_row_in_calculator");
-    button.addEventListener("click", addRow);
+  
+    if (!button) return;
+    button.addEventListener("click", function (e) {
+     
+      e.preventDefault();
+       if (button.hasAttribute("disabled")) return;
+      addRow();
+    });
   }
 
   function initCalculator() {
@@ -484,7 +535,7 @@ var popupModule = (function () {
                   ${htmlTemplateRow(1)}
                   <tr class="col_add_row">
                   <td class="col_1 col_rowspan">
-                  <button id="add_row_in_calculator" class="add_row_in_calculator"><img src="./assets/medias/icon_mini.png" alt="" width="50" height="50"></button>
+                  <button type="button" id="add_row_in_calculator" class="add_row_in_calculator"><img src="./assets/medias/icon_mini.png" alt="" width="50" height="50"></button>
                   </td>
                   <td></td>
                   <td></td>
@@ -511,6 +562,7 @@ var popupModule = (function () {
                   </tbody>
                  
                 </table>
+              <div id="table_calc_error" class="calc_error hide"></div>
               </div>
     `;
   }
