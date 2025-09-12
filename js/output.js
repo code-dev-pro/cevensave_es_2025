@@ -714,6 +714,7 @@ var outputModule = (function () {
     domChart.blocCostsBottom = document.getElementById("bloc-costs-bottom-2");
     domChart.blocCostsBottom1 = document.getElementById("bloc-costs-bottom-1");
     domChart.headerImg = document.getElementById("header_img");
+    domChart.popupButton = document.getElementById("popup_button");
   }
 
   function initEvents() {
@@ -985,7 +986,7 @@ var outputModule = (function () {
     initDomChart();
     initEvents();
     refresh();
-
+ 
     domChart.goBackToTools.addEventListener("click", function () {
       domChart.outputSection.style.display = "none";
       domChart.goBackToTools.style.display = "none";
@@ -993,6 +994,7 @@ var outputModule = (function () {
       domChart.outputButton.style.display = "flex";
       domChart.homeButton.style.display = "flex";
       domChart.headerImg.style.top = "-100px";
+      domChart.popupButton.style.display = "flex";
       destroy();
     });
 
@@ -1012,7 +1014,7 @@ var outputModule = (function () {
     }
     isMgSelected = false;
     isApcc = window.isApcc;
-
+   
     if (domChart.graphRightInstance && domChart.graphLeftInstance) {
       destroy();
       initChart();

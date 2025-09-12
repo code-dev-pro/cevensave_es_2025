@@ -305,6 +305,7 @@ var toolModule = (function () {
 
   function initAppEvents() {
     cevensave.outputButton.addEventListener("click", function () {
+     
       var hasError = false;
       var colum_11 = document.querySelectorAll(".col_11");
       var colum_12 = document.querySelectorAll(".col_12");
@@ -363,7 +364,7 @@ var toolModule = (function () {
       cevensave.outputSection.style.display = "flex";
       cevensave.goBackToTools.style.display = "flex";
       outputModule.refresh();
-      cevensave.popupButton.style.display = "flex";
+      cevensave.popupButton.style.display = "none";
     });
 
     cevensave.homeButton.addEventListener("click", function () {
