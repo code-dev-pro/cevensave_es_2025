@@ -7,7 +7,7 @@ var fullscreenModule = (function () {
     var  buttonOn= document.getElementById('toogleScreen-on')
 
     function initEvent (){
-        // toggleScreenButton.addEventListener('click',toggleScreen)
+        toggleScreenButton.addEventListener('click',toggleScreen)
     }
 
     function toggleScreen () {

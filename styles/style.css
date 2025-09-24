@@ -574,8 +574,7 @@ td {
 
 #table_wrapper {
   width: 100%;
-  /* height: 550px; */
-  height: 575px;
+  height: 545px;
   overflow: hidden;
   touch-action: auto;
   z-index: 100;
@@ -744,7 +743,7 @@ td {
 
 #header_img {
   position: absolute;
-  top: -70px;
+  top: 0px;
   left: 0;
   z-index: 0;
 }
@@ -823,8 +822,8 @@ td {
 #toogleScreen {
   cursor: pointer;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  left: 15px;
+  bottom: 15px;
   z-index: 100;
 }
 
@@ -962,6 +961,7 @@ sup {
 
 .resumen_pdf {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: flex-start;
   background-color: #fff;
@@ -969,7 +969,7 @@ sup {
   min-width: 320px;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 10px;
+  left: 30px;
   padding-right: 10px;
 
 }
@@ -1091,6 +1091,11 @@ sup {
 
 #table_calculator_tbody tr:nth-child(1) td:nth-child(6) {
   border: none
+}
+
+#table_calculator_thead tr,.total_info_tr td, #table_calculator_tbody td {
+  height: 63px;
+  padding: 0;
 }
 
 #table_calculator_tbody .col_add_row td:nth-child(6),
