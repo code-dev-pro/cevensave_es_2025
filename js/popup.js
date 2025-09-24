@@ -377,6 +377,28 @@ var popupModule = (function () {
     if (totalEl) totalEl.textContent = String(sum);
   }
 
+  // Fonction de validation pour limiter les valeurs dans les bornes définies
+  function validateInputValue(input) {
+    if (!input || input.type !== "number") return;
+    
+    var value = Number(input.value);
+    var min = Number(input.getAttribute("min"));
+    var max = Number(input.getAttribute("max"));
+    
+    // Si la valeur n'est pas un nombre valide, on ne fait rien
+    if (!isFinite(value)) return;
+    
+    // Si les attributs min/max ne sont pas définis, on ne fait rien
+    if (!isFinite(min) || !isFinite(max)) return;
+    
+    // Applique les limites et corrige automatiquement si nécessaire
+    if (value < min) {
+      input.value = String(min);
+    } else if (value > max) {
+      input.value = String(max);
+    }
+  }
+
   function attachDelegatedListeners() {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return;
@@ -399,6 +421,9 @@ var popupModule = (function () {
     tbody.addEventListener("input", (e) => {
       if (!e.target.matches("input.input[type='number']")) return;
 
+      // Applique la validation des bornes min/max pour la saisie manuelle
+      validateInputValue(e.target);
+
       var tr = e.target.closest("tr");
       if (!tr || tr.classList.contains("col_add_row")) return;
       // Recalcule la ligne et met à jour le total
@@ -412,6 +437,23 @@ var popupModule = (function () {
       saveTableState();
       validateTableSequence();
     });
+
+    // Validation supplémentaire lors de la perte de focus (blur)
+    tbody.addEventListener("blur", (e) => {
+      if (!e.target.matches("input.input[type='number']")) return;
+      
+      // Applique la validation des bornes min/max
+      validateInputValue(e.target);
+      
+      var tr = e.target.closest("tr");
+      if (!tr || tr.classList.contains("col_add_row")) return;
+      
+      // Recalcule la ligne et met à jour le total après validation
+      calculateRowAndRender(tr);
+      updateTotal();
+      saveTableState();
+      validateTableSequence();
+    }, true); // true pour capturer l'événement
 
     // Suppression d'une ligne via l'icône poubelle
     tbody.addEventListener("click", function (e) {
@@ -529,7 +571,7 @@ var popupModule = (function () {
     </tr>
     </thread>    
     </table>
-     <div id="table_wrapper">
+     <div id="table_wrapper_calculator">
                 <table id="tables_body" class="tool_content--table">
                   <tbody id="table_calculator_tbody">
                   ${htmlTemplateRow(1)}
