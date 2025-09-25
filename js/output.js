@@ -288,7 +288,7 @@ var outputModule = (function () {
         y: {
           display: true,
           text: translate("Cost (£)", currentLanguage),
-          offsetX: -40,
+          offsetX: -30,
           offsetY: -25,
           font: "24px Open Sans",
         },
@@ -993,7 +993,7 @@ var outputModule = (function () {
       domChart.toolSection.style.display = "flex";
       domChart.outputButton.style.display = "flex";
       domChart.homeButton.style.display = "flex";
-      domChart.headerImg.style.top = "-100px";
+      domChart.headerImg.style.top = "-70px";
       domChart.popupButton.style.display = "flex";
       destroy();
     });

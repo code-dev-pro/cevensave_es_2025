@@ -10,8 +10,6 @@ var popupModule = (function () {
   function init() {
     console.log("INIT::", nameModule);
     setPopups();
-    // scrollI("#scrollContainer", "elevatorContainer", function () {});
-    // window.addEventListener("resize", refreshIScroll);
   }
 
   function setPopups() {
@@ -20,7 +18,7 @@ var popupModule = (function () {
         var target = this.dataset.target;
         if (target === "popup_1") {
           initCalculator();
-          // Restaure l'état sauvegardé (si présent)
+
           restoreTableState();
           initEventAddRow();
           attachDelegatedListeners();
@@ -45,7 +43,7 @@ var popupModule = (function () {
     for (var i = 0; i < popupsDismiss.length; i++) {
       popupsDismiss[i].addEventListener("click", function () {
         var target = this.dataset.dismiss;
-        // Sauvegarde l'état actuel avant de fermer
+
         saveTableState();
         document.getElementById(target).classList.remove("show");
         var sections = document.querySelectorAll("section");
@@ -60,37 +58,15 @@ var popupModule = (function () {
     }
   }
 
-  function refreshIScroll() {
-    myScroll.refresh();
-  }
-
-  function scrollI(scrolled) {
-    myScroll = new IScroll(scrolled, {
-      scrollbars: "custom",
-      resizeScrollbars: false,
-
-      zoom: true,
-      mouseWheel: true,
-      wheelAction: "zoom",
-      probeType: 3,
-      bounce: false,
-      interactiveScrollbars: true,
-      onBeforeScrollStart: function (e) {},
-      onScrollStart: function (e) {},
-    });
-  }
-
-  // Bouton Reiniciar (réinitialisation du tableau)
   function resetCalculator() {
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) {}
-    // Reconstruire le contenu par défaut
+
     initCalculator();
-    // Réattacher les listeners sur les nouveaux éléments
-  
-      initEventAddRow();
-   
+
+    initEventAddRow();
+
     attachDelegatedListeners();
     initResetButton();
     updateAddRowState();
@@ -163,9 +139,9 @@ var popupModule = (function () {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return;
 
-    var rows = parsed.rows.slice(0, maxRow); // respect du max
+    var rows = parsed.rows.slice(0, maxRow); 
     if (rows.length === 0) {
-      // Aucun état sauvegardé: ne pas effacer la ligne par défaut
+     
       return;
     }
 
@@ -192,7 +168,7 @@ var popupModule = (function () {
         if (freqInput) freqInput.value = row.frequency || "";
         if (fromInput) fromInput.value = row.from || "";
         if (toInput) toInput.value = row.to || "";
-        // Calculer le résultat pour cette ligne
+        
         calculateRowAndRender(tr);
       } catch (e) {}
     });
@@ -232,18 +208,17 @@ var popupModule = (function () {
     );
   }
   function addRow() {
-   
     var tbody = document.getElementById("table_calculator_tbody");
-    var addRowTr = tbody.querySelector(".col_add_row"); // ligne contenant le bouton
+    var addRowTr = tbody.querySelector(".col_add_row"); 
 
-    // Calcule un index pour la nouvelle ligne (exclut la ligne bouton et la ligne total)
+ 
     var dataRowsCount = Array.from(tbody.querySelectorAll("tr")).filter(
       (tr) =>
         !tr.classList.contains("col_add_row") &&
         !tr.querySelector(".total_info")
     ).length;
 
-    // Déterminer la valeur par défaut de "Desde el día" = (Hasta de la ligne précédente) + 1
+   
     var existingRows = Array.from(tbody.querySelectorAll("tr")).filter(
       function (tr) {
         return (
@@ -263,14 +238,14 @@ var popupModule = (function () {
       if (isFinite(prevHasta)) nextFromValue = String(prevHasta + 1);
     }
 
-    // IMPORTANT: htmlTemplateRow doit retourner un TR complet ou on le wrap ici
+   
     var tr = document.createElement("tr");
-    tr.innerHTML = htmlTemplateRow(dataRowsCount + 1); // injecte les TD
+    tr.innerHTML = htmlTemplateRow(dataRowsCount + 1);
 
-    // Insère avant la ligne avec le bouton
+   
     tbody.insertBefore(tr, addRowTr);
 
-    // Renseigner la valeur par défaut pour "Desde el día" sur la nouvelle ligne
+   
     try {
       var newTds = tr.querySelectorAll("td");
       var desdeInput = newTds[2] && newTds[2].querySelector("input");
@@ -288,7 +263,7 @@ var popupModule = (function () {
     } catch (e) {}
 
     updateAddRowState();
-    // Calcul initial de la ligne ajoutée + MAJ total
+  
     calculateRowAndRender(tr);
     updateTotal();
     saveTableState();
@@ -325,11 +300,11 @@ var popupModule = (function () {
     var d = Number(toDay);
     if (!isFinite(f) || !isFinite(c) || !isFinite(d)) return 0;
     if (f <= 0) return 0;
-    // ENT -> Math.floor
+   
     return Math.floor(((d - c + 1) * 24) / f);
   }
 
-  // Récupère les valeurs d'une ligne et rend le résultat dans la 5e cellule si présente
+ 
   function calculateRowAndRender(tr) {
     if (!tr || tr.classList.contains("col_add_row")) return 0;
     var tds = tr.querySelectorAll("td");
@@ -344,7 +319,7 @@ var popupModule = (function () {
 
     var value = computeDoses(freq, fromDay, toDay);
 
-    // Rendu si cellule résultat existe
+  
     var resultCell = tds[4];
     if (resultCell) {
       var slot = resultCell.querySelector(".result_dosis");
@@ -364,7 +339,7 @@ var popupModule = (function () {
       );
     });
     rows.forEach(function (tr) {
-      // Si la cellule résultat existe et contient une valeur, on l'utilise, sinon on recalcule
+     
       var tds = tr.querySelectorAll("td");
       var slot = tds[4] && tds[4].querySelector(".result_dosis");
       var n = slot ? Number(slot.textContent) : NaN;
@@ -380,17 +355,17 @@ var popupModule = (function () {
   // Fonction de validation pour limiter les valeurs dans les bornes définies
   function validateInputValue(input) {
     if (!input || input.type !== "number") return;
-    
+
     var value = Number(input.value);
     var min = Number(input.getAttribute("min"));
     var max = Number(input.getAttribute("max"));
-    
+
     // Si la valeur n'est pas un nombre valide, on ne fait rien
     if (!isFinite(value)) return;
-    
+
     // Si les attributs min/max ne sont pas définis, on ne fait rien
     if (!isFinite(min) || !isFinite(max)) return;
-    
+
     // Applique les limites et corrige automatiquement si nécessaire
     if (value < min) {
       input.value = String(min);
@@ -417,54 +392,59 @@ var popupModule = (function () {
         e.target.value = e.target.value.replace(/[^0-9]/g, "");
       }
     });
-    // Un seul listener pour tous les inputs numériques (dynamiques inclus)
+
+    // validation de l'input au blur
+    tbody.addEventListener("blur", (e) => {
+      if (!e.target.matches("input.input[type='number']")) return;
+
+      validateInputValue(e.target);
+    });
+
     tbody.addEventListener("input", (e) => {
       if (!e.target.matches("input.input[type='number']")) return;
 
-      // Applique la validation des bornes min/max pour la saisie manuelle
-      validateInputValue(e.target);
+      // validateInputValue(e.target);
 
       var tr = e.target.closest("tr");
       if (!tr || tr.classList.contains("col_add_row")) return;
-      // Recalcule la ligne et met à jour le total
+
       var inputs = tr.querySelectorAll("input.input[type='number']");
       var values = Array.from(inputs).map((i) => Number(i.value) || 0);
-      // tr.querySelector(".result_dosis")?.textContent = monCalcul(values);
+
       calculateRowAndRender(tr);
-      // TODO: recalcule le total global si nécessaire
-      // updateTotal();
+
       updateTotal();
       saveTableState();
       validateTableSequence();
     });
 
-    // Validation supplémentaire lors de la perte de focus (blur)
-    tbody.addEventListener("blur", (e) => {
-      if (!e.target.matches("input.input[type='number']")) return;
-      
-      // Applique la validation des bornes min/max
-      validateInputValue(e.target);
-      
-      var tr = e.target.closest("tr");
-      if (!tr || tr.classList.contains("col_add_row")) return;
-      
-      // Recalcule la ligne et met à jour le total après validation
-      calculateRowAndRender(tr);
-      updateTotal();
-      saveTableState();
-      validateTableSequence();
-    }, true); // true pour capturer l'événement
+    tbody.addEventListener(
+      "blur",
+      (e) => {
+        if (!e.target.matches("input.input[type='number']")) return;
 
-    // Suppression d'une ligne via l'icône poubelle
+        validateInputValue(e.target);
+
+        var tr = e.target.closest("tr");
+        if (!tr || tr.classList.contains("col_add_row")) return;
+
+        calculateRowAndRender(tr);
+        updateTotal();
+        saveTableState();
+        validateTableSequence();
+      },
+      true
+    );
+
     tbody.addEventListener("click", function (e) {
       var target = e.target;
       if (!(target && target.classList && target.classList.contains("trash")))
         return;
       var tr = target.closest("tr");
       if (!tr) return;
-      // Supprime la ligne
+
       tr.remove();
-      // Réindexe les libellés "Periodo X"
+
       var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (
         row
       ) {
@@ -477,7 +457,7 @@ var popupModule = (function () {
         var firstTd = row.querySelector("td");
         if (firstTd) firstTd.textContent = "Periodo " + (i + 1);
       });
-      // MAJ UI et persistance
+
       updateTotal();
       updateAddRowState();
       updateDeleteIcons();
@@ -486,12 +466,14 @@ var popupModule = (function () {
     });
   }
 
-  // Valide que "Desde el día" de la ligne courante soit > au "Hasta el día" de la ligne précédente
   function validateTableSequence() {
     var tbody = document.getElementById("table_calculator_tbody");
     if (!tbody) return;
     var rows = Array.from(tbody.querySelectorAll("tr")).filter(function (tr) {
-      return !tr.classList.contains("col_add_row") && !tr.querySelector(".total_info");
+      return (
+        !tr.classList.contains("col_add_row") &&
+        !tr.querySelector(".total_info")
+      );
     });
 
     var isValid = true;
@@ -531,7 +513,8 @@ var popupModule = (function () {
       errorEl.classList.remove("show");
       errorEl.textContent = "";
     } else {
-      errorEl.textContent = "El valor debe ser mayor que el valor anterior en la lista para que sea válido.";
+      errorEl.textContent =
+        "El valor debe ser mayor que el valor anterior en la lista para que sea válido.";
       errorEl.classList.remove("hide");
       errorEl.classList.add("show");
     }
@@ -540,17 +523,14 @@ var popupModule = (function () {
     // var addBtn = document.getElementById("add_row_in_calculator");
     // if (addBtn) addBtn.toggleAttribute("disabled", !isValid || getDataRowsCount() >= maxRow);
   }
- 
 
   function initEventAddRow() {
-   
     var button = document.getElementById("add_row_in_calculator");
-  
+
     if (!button) return;
     button.addEventListener("click", function (e) {
-     
       e.preventDefault();
-       if (button.hasAttribute("disabled")) return;
+      if (button.hasAttribute("disabled")) return;
       addRow();
     });
   }

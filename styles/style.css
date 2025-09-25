@@ -414,6 +414,7 @@ select[name='presentation'] option:checked {
 
 #tables_body {
   margin-top: 0;
+  touch-action: pan-y;
 }
 
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(2),
@@ -612,7 +613,7 @@ td {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  height: 85%;
+  height: 95%;
   box-shadow: 0 0 103px 0 rgba(146, 146, 146, 0.24);
   z-index: 1000;
   background-color: #fff;
@@ -677,7 +678,7 @@ td {
   position: absolute;
   top: 207px;
   right: 20px;
-  height: 600px;
+  height: 550px;
   width: 10px;
 }
 
@@ -1067,7 +1068,7 @@ sup {
   font-weight: bold;
   text-align: center;
   position: absolute;
-  bottom: 0;
+  bottom: -20px;
   width: 100%;
 }
 
