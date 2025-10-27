@@ -23,6 +23,9 @@
 .size40 {
   font-size: 40px;
 }
+.size50 {
+  font-size: 50px;
+}
 .size21 {
   font-size: 18px;
 }
@@ -41,9 +44,10 @@
 }
 
 #output-container h2 {
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   margin-bottom: 50px;
+  font-weight: bold;
 }
 
 #output-footer {
@@ -68,7 +72,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* height: 250px; */
   padding-right: 40px;
   padding-left: 40px;
 }

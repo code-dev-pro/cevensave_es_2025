@@ -964,10 +964,9 @@ sup {
   display: flex;
   position: relative;
   justify-content: center;
+  flex-direction: column;
   align-items: flex-start;
-  background-color: #fff;
-  border-radius: 100px;
-  min-width: 320px;
+  width: 450px;
   padding-top: 20px;
   padding-bottom: 20px;
   left: 30px;
@@ -979,18 +978,22 @@ sup {
   font-size: 14px;
   text-align: left;
   margin-left: 20px;
-
 }
 
 .resumen_pdf_button_text sup {
   font-size: 12px;
 }
 
+
+
 #resumen_pdf_button {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   text-decoration: none !important;
+  text-decoration: underline !important;
+  color: #606773 !important;
+  margin-bottom: 5px;
 
 }
 
@@ -1094,7 +1097,9 @@ sup {
   border: none
 }
 
-#table_calculator_thead tr,.total_info_tr td, #table_calculator_tbody td {
+#table_calculator_thead tr,
+.total_info_tr td,
+#table_calculator_tbody td {
   height: 63px;
   padding: 0;
 }
@@ -1111,4 +1116,103 @@ sup {
 
 .col_action {
   cursor: pointer;
+}
+
+#references {
+  position: absolute;
+  top: 50%;
+  left: -45px;
+  transform: translate(0, -50%) rotate(90deg);
+  font-size: 12px;
+
+
+}
+
+.presentation {
+  display: none;
+}
+
+tr.col_add_row td:nth-child(7) {
+  display: none;
+}
+
+#hospital_tbody tr .col_8 {
+  display: none;
+}
+
+#avisios {
+  width: 320px;
+  background-color: #fff;
+  position: absolute;
+  height: 80px;
+  border-radius: 100px;
+  right: 20%;
+  display: flex;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#popup_legales{
+  width: 1585px;
+  height: 830px;
+}
+
+#popup_legales a{
+  color: #606773;
+  text-decoration: none;
+}
+
+#popup_legales_title {
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+#popup_legales_text p {
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+#popup_legales {
+  padding-top:50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#popup_legales h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#qr,#arrow_black {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+#arrow_black{
+  align-items: flex-start;
+
+}
+
+#arrow_black img{
+ margin-top: 7px;
+}
+  
+#legales_img{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

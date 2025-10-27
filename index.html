@@ -13,35 +13,83 @@
     <link rel="stylesheet" href="styles/de.css" />
     <link rel="stylesheet" href="styles/es.css" />
 
-    <link rel="icon" type="image/png" href="assets/icons/16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="assets/icons/36.png" sizes="36x36" />
-    <link rel="icon" type="image/png" href="assets/icons/48.png" sizes="48x48" />
-    <link rel="icon" type="image/png" href="assets/icons/512.png" sizes="512x512" />
-    <link rel="icon" type="image/png" href="assets/icons/1024.png" sizes="1024x1024" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/36.png"
+      sizes="36x36"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/48.png"
+      sizes="48x48"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/512.png"
+      sizes="512x512"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/1024.png"
+      sizes="1024x1024"
+    />
 
     <title>CevenSave - App</title>
   </head>
+
   <body class="hospital">
+    <div id="references">PP-7F-059-October 2025</div>
     <div id="wrapper_app">
       <header id="header">
         <button type="button" id="home_button">
-          <img src="assets/medias/icon_home.png" alt="" width="105" height="105" />
+          <img
+            src="assets/medias/icon_home.png"
+            alt=""
+            width="105"
+            height="105"
+          />
         </button>
         <div id="logo">
           <p>Ceven<span>Save</span></p>
           <p id="logo_app">app</p>
         </div>
         <button type="button" id="popup_button" data-target="popup_1">
-          <img width="105" height="105" src="./assets/medias/icon_calculator_grey.png" alt="" />
+          <img
+            width="105"
+            height="105"
+            src="./assets/medias/icon_calculator_grey.png"
+            alt=""
+          />
         </button>
-       
-        <img id="header_img" class="responsive" src="./assets/medias/header_home.png" alt="" />
+
+        <img
+          id="header_img"
+          class="responsive"
+          src="./assets/medias/header_home.png"
+          alt=""
+        />
       </header>
       <main id="container">
         <section id="welcome">
           <div class="welcome_content--wrapper">
             <div class="welcome_content">
-              <img id="dot_1" src="./assets/medias/icon_calculator.png" alt="" width="100" height="100" />
+              <img
+                id="dot_1"
+                src="./assets/medias/icon_calculator.png"
+                alt=""
+                width="100"
+                height="100"
+              />
               <div class="welcome_content--block">
                 <h2 id="overview_tool"></h2>
                 <p id="overview_tool_text"></p>
@@ -62,7 +110,13 @@
               </div>
             </div>
             <div class="welcome_content">
-              <img id="dot_2" src="./assets/medias/icon_analytics.png" alt="" width="100" height="100" />
+              <img
+                id="dot_2"
+                src="./assets/medias/icon_analytics.png"
+                alt=""
+                width="100"
+                height="100"
+              />
               <div class="welcome_content--block">
                 <h2 id="overview_output"></h2>
                 <ul>
@@ -111,7 +165,7 @@
                     <th class="col_5"></th>
                     <th class="col_6 col_clear clear_events"></th>
                     <th></th>
-                    <th></th>
+                    <!-- <th></th> -->
                     <th class="col_clear clear_doses" colspan="3"></th>
                     <th class="col_clear clear_prices"></th>
                     <th class="delete_row_header"></th>
@@ -140,7 +194,7 @@
                     <th class="col_5"></th>
                     <th class="col_6 col_clear clear_events"></th>
                     <th></th>
-                    <th></th>
+                    <!-- <th></th> -->
                     <th class="col_clear clear_doses" colspan="3"></th>
                     <th class="col_clear clear_prices"></th>
                     <th class="delete_row_header"></th>
@@ -167,7 +221,7 @@
                     <th class="col_5"></th>
                     <th class="col_6 col_clear clear_events"></th>
                     <th></th>
-                    <th></th>
+                    <!-- <th></th> -->
                     <th class="col_clear clear_doses" colspan="3"></th>
                     <th class="col_clear clear_prices"></th>
                     <th class="delete_row_header"></th>
@@ -176,7 +230,10 @@
                     <th id="event_body_weight" class="body_weight col_3"></th>
                     <th class="non_replacement_therapy"></th>
                     <th class="type_event col_5"></th>
-                    <th id="event_events_patients" class="events_patients col_6"></th>
+                    <th
+                      id="event_events_patients"
+                      class="events_patients col_6"
+                    ></th>
                     <th class="product"></th>
                     <th class="presentation"></th>
                     <th class="initial_dose"></th>
@@ -199,7 +256,6 @@
             <div class="tools_legend">
               <p id="tools_legend--first" class="tools_legend--first"></p>
               <p id="tools_legend--second" class="tools_legend--second"></p>
-             
             </div>
           </div>
         </section>
@@ -210,46 +266,80 @@
             <div id="output-footer">
               <div id="outputleft">
                 <div id="outputleft-container">
-                  <h2 id="outputleft-title" class="size40"></h2>
+                  <h2 id="outputleft-title"></h2>
                   <div id="bloc-costs">
                     <div id="bloc-costs-top-1">
                       <div class="bloc-container">
-                        <p id="label_cost_saving_vs_alfa" class="size21 right"></p>
-                        <div class="bloc-costs size40 color1 borderColor1" id="costSavingVsAlfa"></div>
+                        <p
+                          id="label_cost_saving_vs_alfa"
+                          class="size21 right"
+                        ></p>
+                        <div
+                          class="bloc-costs size40 color1 borderColor1"
+                          id="costSavingVsAlfa"
+                        ></div>
                       </div>
                       <div class="bloc-container">
-                        <p id="label_cost_saving_vs_alfa_percent" class="size21 right"></p>
-                        <div class="bloc-costs percent color1 borderColor1" id="percentSavingVsAlfa"></div>
+                        <p
+                          id="label_cost_saving_vs_alfa_percent"
+                          class="size21 right"
+                        ></p>
+                        <div
+                          class="bloc-costs percent color1 borderColor1"
+                          id="percentSavingVsAlfa"
+                        ></div>
                       </div>
                     </div>
 
                     <div id="bloc-costs-bottom-1">
                       <div class="bloc-container">
-                        <p id="label_cost_saving_vs_apcc" class="size21 right"></p>
-                        <div class="bloc-costs size40 color2 borderColor2" id="costSavingVsApcc"></div>
+                        <p
+                          id="label_cost_saving_vs_apcc"
+                          class="size21 right"
+                        ></p>
+                        <div
+                          class="bloc-costs size40 color2 borderColor2"
+                          id="costSavingVsApcc"
+                        ></div>
                       </div>
                       <div class="bloc-container">
-                        <p id="label_cost_saving_vs_apcc_percent" class="size21 right"></p>
-                        <div class="bloc-costs borderColor2 percent color2" id="percentSavingVsApcc"></div>
+                        <p
+                          id="label_cost_saving_vs_apcc_percent"
+                          class="size21 right"
+                        ></p>
+                        <div
+                          class="bloc-costs borderColor2 percent color2"
+                          id="percentSavingVsApcc"
+                        ></div>
                       </div>
                     </div>
                   </div>
                   <canvas id="bloc-graph-left"></canvas>
-                  <div id="outputleft-notes" class="blank" style="visibility: hidden"></div>
+                  <div
+                    id="outputleft-notes"
+                    class="blank"
+                    style="visibility: hidden"
+                  ></div>
                 </div>
               </div>
               <div id="outputright">
                 <div id="outputright-container">
-                  <h2 id="outputright-title" class="size40"></h2>
+                  <h2 id="outputright-title"></h2>
                   <div id="bloc-usage">
                     <div id="bloc-costs-top-2" class="justify-center">
                       <div class="bloc-container">
                         <p class="size21 right" id="vials_saved_alpha"></p>
-                        <div class="bloc-costs size40 percent color1 borderColor1" id="vialsSavedAlfa"></div>
+                        <div
+                          class="bloc-costs size40 percent color1 borderColor1"
+                          id="vialsSavedAlfa"
+                        ></div>
                       </div>
                       <div class="bloc-container" id="bloc-vialsApcc">
                         <p id="vials_saved_apcc" class="size21 right"></p>
-                        <div class="bloc-costs size40 percent borderColor2 color2" id="vialsSavedSeptacog"></div>
+                        <div
+                          class="bloc-costs size40 percent borderColor2 color2"
+                          id="vialsSavedSeptacog"
+                        ></div>
                       </div>
                     </div>
 
@@ -259,10 +349,18 @@
                         <div class="inputs">
                           <form name="formTotal" id="formTotal">
                             <div class="input-container">
-                              <label id="label_total_vials" class="size21" for="totalVials"></label>
+                              <label
+                                id="label_total_vials"
+                                class="size21"
+                                for="totalVials"
+                              ></label>
                             </div>
                             <div class="input-container">
-                              <label id="label_total_mg" class="size21" for="totalmg"></label>
+                              <label
+                                id="label_total_mg"
+                                class="size21"
+                                for="totalmg"
+                              ></label>
                             </div>
                           </form>
                         </div>
@@ -275,21 +373,40 @@
                           <div class="input-container">
                             <label class="size21" for="500IU"
                               >500 IU<br />/ 1 mg
-                              <input type="radio" id="500IU" name="iu" class="iu checkmark" value="1" checked />
+                              <input
+                                type="radio"
+                                id="500IU"
+                                name="iu"
+                                class="iu checkmark"
+                                value="1"
+                                checked
+                              />
                               <span class="checkmark"></span>
                             </label>
                           </div>
                           <div class="input-container">
                             <label class="size21" for="1000IU"
                               >1000 IU<br />/ 2 mg
-                              <input type="radio" id="1000IU" value="2" class="iu checkmark" name="iu" />
+                              <input
+                                type="radio"
+                                id="1000IU"
+                                value="2"
+                                class="iu checkmark"
+                                name="iu"
+                              />
                               <span class="checkmark"></span>
                             </label>
                           </div>
                           <div class="input-container">
                             <label class="size21" for="2500IU"
                               >2500 IU<br />/ 5 mg
-                              <input type="radio" id="2500IU" value="5" class="iu checkmark" name="iu" />
+                              <input
+                                type="radio"
+                                id="2500IU"
+                                value="5"
+                                class="iu checkmark"
+                                name="iu"
+                              />
                               <span class="checkmark"></span>
                             </label>
                           </div>
@@ -315,72 +432,206 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
         </div>
 
         <!-- SCROLL -->
-        <div  id="slideContainer">
+        <div id="slideContainer">
           <h2 id="popup_1_title"></h2>
           <div id="scrollContainer" class="scrollContainer miih_free">
-            <div class="scroll" style="transform: translate(0px, 0px) translateZ(0px)">
+            <div
+              class="scroll"
+              style="transform: translate(0px, 0px) translateZ(0px)"
+            >
               <p id="popup_1_text"></p>
             </div>
           </div>
           <div class="tools_legend tools_legend_2">
             <p id="tools_legend--first_2" class="tools_legend--first"></p>
             <p id="tools_legend--second_2" class="tools_legend--second"></p>
-          
           </div>
         </div>
         <!-- END SCROLL -->
       </section>
+      <section id="popup_legales" class="popup_wrapper">
+        <div class="popup_close" data-dismiss="popup_legales">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </div>
+        <div id="popup_legales_content">
+          <h2 id="popup_legales_title">Avisos legales</h2>
+          <div id="popup_legales_text">
+            <p>
+              CEVENFACTA<sup>®</sup> está indicado en pacientes adultos y
+              adolescentes (de 12 años o más) en el tratamiento de episodios de
+              sangrado y en la prevención de sangrados en los siguientes grupos
+              de pacientes, cuando se someten a cirugía o a un procedimiento
+              invasivo. <br />
+
+              • pacientes con hemofilia congénita con inhibidores de alta
+              respuesta a los factores de coagulación VIII o IX (es decir, ≥ 5
+              unidades Bethesda (UB)).<br />
+
+              • pacientes con hemofilia congénita con inhibidores de baja
+              respuesta (UB < 5), pero que se espera o que tengan una respuesta
+              anamnésica elevada a la administración de factor VIII o factor IX
+              o bien que sean refractarios a una mayor dosis de FVIII o
+              FIX<sup>1</sup>.
+            </p>
+
+            <br />
+            <div id="arrow_black">
+              <img
+                src="assets/medias/arrow_black.png"
+                width="23"
+                height="19"
+                alt="QR Code"
+              />
+              <p>
+                Este medicamento está sujeto a seguimiento adicional, lo que
+                agilizará la detección de nueva información sobre su seguridad.
+                Se invita a los profesionales sanitarios a notificar las
+                sospechas de reacciones adversas<sup>1</sup>.
+              </p>
+            </div>
+            <br />
+            <div id="qr">
+              <img
+                src="assets/medias/qr_code.png"
+                width="72"
+                height="72"
+                alt="QR Code"
+              />
+              <p>
+                Escanee o haga click en código QR con su smartphone o tablet
+                para acceder a la Ficha Técnica de CEVENFACTA<sup>®</sup>
+              </p>
+            </div>
+            <br />
+
+            <h3>CONDICIONES DE DISPENSACIÓN<sup>1</sup></h3>
+            <p>
+              MEDICAMENTO SUJETO A PRESCRIPCOIÓN MÉDICA, Uso Hospitalario.
+              Medicamento incluido en la prestación farmacéutica del Sistema
+              Nacional de Salud.
+            </p>
+
+            <br />
+
+            <h3>PRESENTACIÓN, CÓDIGO NACIONAL Y PRECIO<sup>1</sup></h3>
+            <p>
+              CEVENFACTA 1 mg (45 kIU), polvo y disolvente para la solución
+              inyectable; C.N.759296; PVL = 558,51 €, PVP = 614,42 €, PVPIVA =
+              639,00 € <br />
+              CEVENFACTA 2 mg (90 kIU), polvo y disolvente para la solución
+              inyectable; C.N.759310; PVL = 1117,02 €, PVP = 1172,93 €, PVPIVA =
+              1219,85 € <br />
+              CEVENFACTA 5 mg (225 kIU), polvo y disolvente para la solución
+              inyectable; C.N.759311; PVL = 2792,55 €, PVP = 2848,46 €, PVPIVA =
+              2962,40 €
+            </p>
+
+            <br />
+
+            <h3>LFB BIOTERAPIAS HISPANIA</h3>
+            <p>
+              Calle de Diego de León, 47 (Melior) 28006 Madrid.<br />
+              Teléfono: 918 38 85 64<br />
+              Farmacovigilancia: 637741601<br />
+              <a target="_blank" href="https://www.groupe-lfb.com"
+                >www.groupe-lfb.com</a
+              >
+            </p>
+            <div id="legales_img">
+              <img width="177" height="52" src="assets/medias/lfb.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
       <footer id="footer">
         <div class="blank">
-        <button id="toogleScreen">
-          <svg id="toogleScreen-off" viewBox="0 0 24.4 24.4">
-            <defs>
-              <style>
-                .cls-1 {
-                  fill: none;
-                  stroke: #5c6771;
-                  stroke-linecap: round;
-                  stroke-linejoin: round;
-                  stroke-width: 2px;
-                }
-              </style>
-            </defs>
-            <path class="cls-1"
-              d="m7.6,14.67l7.07-7.07c.54-.54.3-1.46-.43-1.67l-8.43-1.36c-.76-.22-1.46.48-1.24,1.24l1.36,8.43c.21.73,1.13.97,1.67.43Z" />
-            <path class="cls-1"
-              d="m9.73,16.79l7.07-7.07c.54-.54,1.46-.3,1.67.43l1.36,8.43c.22.76-.48,1.46-1.24,1.24l-8.43-1.36c-.73-.21-.97-1.13-.43-1.67Z" />
-          </svg>
-        
-          <svg id="toogleScreen-on" class="hide" viewBox="0 0 24.4 24.4">
-            <defs>
-              <style>
-                .cls-1 {
-                  fill: none;
-                  stroke: #5c6771;
-                  stroke-linecap: round;
-                  stroke-linejoin: round;
-                  stroke-width: 2px;
-                }
-              </style>
-            </defs>
-            <path class="cls-1"
-              d="m8.36,1.29L1.29,8.36c-.54.54-.3,1.46.43,1.67l8.43,1.36c.76.22,1.46-.48,1.24-1.24l-1.36-8.43c-.21-.73-1.13-.97-1.67-.43Z" />
-            <path class="cls-1"
-              d="m23.11,16.04l-7.07,7.07c-.54.54-1.46.3-1.67-.43l-1.36-8.43c-.22-.76.48-1.46,1.24-1.24l8.43,1.36c.73.21.97,1.13.43,1.67Z" />
-          </svg>
-        </button>
+          <button id="toogleScreen">
+            <svg id="toogleScreen-off" viewBox="0 0 24.4 24.4">
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: none;
+                    stroke: #5c6771;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-width: 2px;
+                  }
+                </style>
+              </defs>
+              <path
+                class="cls-1"
+                d="m7.6,14.67l7.07-7.07c.54-.54.3-1.46-.43-1.67l-8.43-1.36c-.76-.22-1.46.48-1.24,1.24l1.36,8.43c.21.73,1.13.97,1.67.43Z"
+              />
+              <path
+                class="cls-1"
+                d="m9.73,16.79l7.07-7.07c.54-.54,1.46-.3,1.67.43l1.36,8.43c.22.76-.48,1.46-1.24,1.24l-8.43-1.36c-.73-.21-.97-1.13-.43-1.67Z"
+              />
+            </svg>
+
+            <svg id="toogleScreen-on" class="hide" viewBox="0 0 24.4 24.4">
+              <defs>
+                <style>
+                  .cls-1 {
+                    fill: none;
+                    stroke: #5c6771;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-width: 2px;
+                  }
+                </style>
+              </defs>
+              <path
+                class="cls-1"
+                d="m8.36,1.29L1.29,8.36c-.54.54-.3,1.46.43,1.67l8.43,1.36c.76.22,1.46-.48,1.24-1.24l-1.36-8.43c-.21-.73-1.13-.97-1.67-.43Z"
+              />
+              <path
+                class="cls-1"
+                d="m23.11,16.04l-7.07,7.07c-.54.54-1.46.3-1.67-.43l-1.36-8.43c-.22-.76.48-1.46,1.24-1.24l8.43,1.36c.73.21.97,1.13.43,1.67Z"
+              />
+            </svg>
+          </button>
           <div class="resumen_pdf">
-            <a href="./assets/pdf/cevenfacta-epar-product-information_en.pdf" target="_blank" id="resumen_pdf_button">
-              <div class="icon_pdf">  <img class="icon_img" src="./assets/medias/icon_pdf.png" alt="" width="36" height="36" /> </div>
-            
-              <p class="resumen_pdf_button_text">CEVENFACTA<sup>®</sup> Resumen<br/>de las caractéristicas del producto</p>
-              
+            <a
+              href="./assets/pdf/cevenfacta-epar-product-information_en.pdf"
+              target="_blank"
+              id="resumen_pdf_button"
+            >
+              <!-- <div class="icon_pdf">  <img class="icon_img" src="./assets/medias/icon_pdf.png" alt="" width="36" height="36" /> </div> -->
+
+              <p class="resumen_pdf_button_text">
+                1. CEVENFACTA<sup>®</sup> Resumen de las caractéristicas del
+                producto
+              </p>
             </a>
+
+            <!-- <div class="icon_pdf">  <img class="icon_img" src="./assets/medias/icon_pdf.png" alt="" width="36" height="36" /> </div> -->
+
+            <p class="resumen_pdf_button_text">
+              2. NOVOSEVEN<sup>®</sup> Resumen de las caracterîsticas del
+              producto
+            </p>
           </div>
         </div>
         <button id="tool_button">
@@ -393,7 +644,11 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            ></path>
           </svg>
         </button>
         <button id="output_button">
@@ -406,7 +661,11 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            ></path>
           </svg>
         </button>
         <button id="tool_button_2">
@@ -418,11 +677,29 @@
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            ></path>
           </svg>
           <span id="tool_button_text_2"></span>
         </button>
-        <div class="img"><img width="177" src="assets/medias/lfb.svg" alt="" /></div>
+        <button id="avisios" data-target="popup_legales">
+          <div class="icon_pdf">
+            <img
+              class="icon_img"
+              src="./assets/medias/icon_pdf.png"
+              alt=""
+              width="36"
+              height="36"
+            />
+          </div>
+          <p>Avisos legales</p>
+        </button>
+        <div class="img">
+          <img width="177" height="52" src="assets/medias/lfb.svg" alt="" />
+        </div>
       </footer>
     </div>
     <script src="js/plugins/iscroll-probe.js"></script>

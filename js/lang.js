@@ -229,7 +229,6 @@ var languageModule = (function () {
       outputright_notes:
         "* Wenn die Zahl nach dem Komma 5 oder mehr beträgt, wird die Zahl aufgerundet.",
       tool_button_text_2: "Werkzeug",
-      
 
       // popup
       popup_1_title: "Referenzen",
@@ -289,9 +288,9 @@ var languageModule = (function () {
       overview_tool_text_3: "",
       overview_output: "Resumen de resultados",
       overview_output_text_1:
-        "Costo comparativo del tratamiento para los tres productos (CEVENFACTA<sup>®</sup>, eptacog alfa)",
+        "Costo comparativo del tratamiento para los dos productos (CEVENFACTA<sup>®</sup>, eptacog alfa)",
       overview_output_text_2:
-        "Uso comparativo de viales o mg para los tres productos (CEVENFACTA<sup>®</sup>, eptacog alfa)",
+        "Uso comparativo de mg para los dos productos (CEVENFACTA<sup>®</sup>, eptacog alfa)",
       tool_button_text: "Herramienta",
 
       // tool page
@@ -308,7 +307,7 @@ var languageModule = (function () {
       tools_legend_second:
         "* Los pacientes se consideran adultos o adolescentes (a partir de 12 años)",
       tools_legend_third: "** Precios medios observados el 1 de abril de 2023.",
-      output_button_text: "Salida",
+      output_button_text: "Resultados",
       // tool page table
       no_patients: "Nº de pacientes",
       type_patient: "Tipo de pacientes*",

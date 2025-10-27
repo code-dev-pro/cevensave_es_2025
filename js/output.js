@@ -39,7 +39,7 @@ var outputModule = (function () {
       "Number of vials*": "Número de viales*",
       Vials: "Viales",
       "Total mg": "Total mg",
-      "mg saved vs eptacog alfa": "mg ahorrados<br><i>vs</i> eptacog alfa",
+      "mg saved vs eptacog alfa": "mg ahorrados<br><i>frente a</i> eptacog alfa",
       "vials saved vs eptacog alfa":
         "Viales ahorrados<br><i>vs</i> eptacog alfa",
     },
@@ -173,6 +173,58 @@ var outputModule = (function () {
     },
   };
 
+  // Plugin pour dessiner le symbole ® en exposant
+  const customLabels = {
+    id: "customLabels",
+    
+    afterDraw(chart, args, pluginOptions) {
+      const {
+        ctx,
+        scales: { x },
+        chartArea: { bottom },
+      } = chart;
+      
+      if (!x || !chart.data || !chart.data.labels) return;
+      
+      ctx.save();
+      
+      // Parcourir tous les labels du graphique
+      chart.data.labels.forEach((label, index) => {
+        // Calculer la position du label
+        const xPos = x.getPixelForTick(index);
+        const yPos = bottom + 15; // Augmenté de 10 à 15 pour plus d'espace
+        
+        if (typeof label === 'string' && label.includes('®')) {
+          // Séparer le texte principal du symbole ®
+          const mainText = label.replace('®', '');
+          
+          // Dessiner le texte principal
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillStyle = '#666';
+          ctx.font = '18px "Helvetica Neue", Helvetica, Arial, sans-serif';
+          ctx.fillText(mainText, xPos, yPos);
+          
+          // Mesurer la largeur du texte principal
+          const textWidth = ctx.measureText(mainText).width;
+          
+          // Dessiner le ® en exposant (plus petit et plus haut)
+          ctx.font = '11px "Helvetica Neue", Helvetica, Arial, sans-serif';
+          ctx.fillText('®', xPos + textWidth / 2 + 3, yPos - 4);
+        } else {
+          // Pour les labels sans ®, les afficher normalement
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillStyle = '#666';
+          ctx.font = '18px "Helvetica Neue", Helvetica, Arial, sans-serif';
+          ctx.fillText(label, xPos, yPos);
+        }
+      });
+      
+      ctx.restore();
+    },
+  };
+
   var currentData = [
     {
       nbOfPatients: 1,
@@ -282,7 +334,11 @@ var outputModule = (function () {
 
   var optionsGraphLeft = {
     ...optionsGraphsCommun,
-
+    layout: {
+      padding: {
+        bottom: 30,
+      },
+    },
     plugins: {
       customTitle: {
         y: {
@@ -322,6 +378,7 @@ var outputModule = (function () {
       x: {
         beginAtZero: true,
         ticks: {
+          display: false,
           font: {
             size: 18,
           },
@@ -368,6 +425,7 @@ var outputModule = (function () {
     layout: {
       padding: {
         right: 0, // Seems neccesarry to put to 0, otherwise seems to not update padding
+        bottom: 30,
       },
     },
     plugins: {
@@ -409,6 +467,7 @@ var outputModule = (function () {
       x: {
         beginAtZero: true,
         ticks: {
+          display: false,
           font: {
             size: 18,
           },
@@ -772,7 +831,7 @@ var outputModule = (function () {
                   2
                 ),
               ],
-              ["CEVENFACTA", "eptacog alfa"]
+              ["CEVENFACTA®", "eptacog alfa"]
             );
 
             manageBlocsInMg("none");
@@ -814,7 +873,7 @@ var outputModule = (function () {
                   Math.round(getValueEptacog(false, false)),
                   Math.round(getValueApcc(false) / 500),
                 ],
-                ["CEVENFACTA", "eptacog alfa", "aPCC"]
+                ["CEVENFACTA®", "eptacog alfa", "aPCC"]
               );
             } else {
               updateChart(
@@ -826,7 +885,7 @@ var outputModule = (function () {
                   Math.round(getValueCevenfacta(false, false)),
                   Math.round(getValueEptacog(false, false)),
                 ],
-                ["CEVENFACTA", "eptacog alfa"]
+                ["CEVENFACTA®", "eptacog alfa"]
               );
             }
 
@@ -869,7 +928,7 @@ var outputModule = (function () {
         (Math.round(getValueCevenfacta(false, false) * 100) / 100).toFixed(2),
         (Math.round(getValueEptacog(false, false) * 100) / 100).toFixed(2),
       ],
-      ["CEVENFACTA", "eptacog alfa"]
+      ["CEVENFACTA®", "eptacog alfa"]
     );
 
     manageBlocsInMg("none");
@@ -902,8 +961,8 @@ var outputModule = (function () {
       type: "bar",
       data: {
         labels: isApcc
-          ? ["CEVENFACTA", "eptacog alfa", "aPCC"]
-          : ["CEVENFACTA", "eptacog alfa"],
+          ? ["CEVENFACTA®", "eptacog alfa", "aPCC"]
+          : ["CEVENFACTA®", "eptacog alfa"],
         datasets: [
           {
             label: "Total Cost",
@@ -924,15 +983,15 @@ var outputModule = (function () {
       options: {
         ...optionsGraphLeft,
       },
-      plugins: [customAxes, customTitle],
+      plugins: [customAxes, customTitle, customLabels],
     });
     domChart.graphLeftInstance = myChartLeftInstance;
     var myChartRightInstance = new Chart(domChart.graphRight, {
       type: "bar",
       data: {
         labels: isApcc
-          ? ["CEVENFACTA", "eptacog alfa", "aPCC"]
-          : ["CEVENFACTA", "eptacog alfa"],
+          ? ["CEVENFACTA®", "eptacog alfa", "aPCC"]
+          : ["CEVENFACTA®", "eptacog alfa"],
         datasets: [
           {
             label: "Number of vials*",
@@ -957,7 +1016,7 @@ var outputModule = (function () {
       options: {
         ...optionsGraphRight,
       },
-      plugins: [customAxes, customTitle],
+      plugins: [customAxes, customTitle, customLabels],
     });
     domChart.graphRightInstance = myChartRightInstance;
   }
