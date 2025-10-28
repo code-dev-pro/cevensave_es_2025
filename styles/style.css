@@ -153,7 +153,8 @@ section {
 #welcome ul li span::before {
   content: '\2022';
   position: absolute;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   color: #d64123;
   font-weight: bold;
@@ -577,9 +578,10 @@ td {
   width: 100%;
   height: 545px;
   overflow: hidden;
-  touch-action: auto;
+  touch-action: none;
   z-index: 100;
 }
+
 
 .apcc_row,
 #delete_row_header,
@@ -978,6 +980,7 @@ sup {
   font-size: 14px;
   text-align: left;
   margin-left: 20px;
+  display: flex;
 }
 
 .resumen_pdf_button_text sup {
@@ -1218,3 +1221,10 @@ tr.col_add_row td:nth-child(7) {
   justify-content: flex-start;
   align-items: center;
 }
+.links_info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
