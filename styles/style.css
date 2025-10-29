@@ -415,7 +415,6 @@ select[name='presentation'] option:checked {
 
 #tables_body {
   margin-top: 0;
-  touch-action: pan-y;
 }
 
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(2),
