@@ -413,9 +413,7 @@ select[name='presentation'] option:checked {
   margin-top: 30px;
 }
 
-#tables_body {
-  margin-top: 0;
-}
+
 
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(2),
 #table_calculator_tbody tr:not(.col_add_row):not(.total_info_tr) td:nth-child(3),
@@ -577,9 +575,19 @@ td {
   width: 100%;
   height: 545px;
   overflow: hidden;
-  touch-action: none;
+  /* touch-action: none; */
   z-index: 100;
+  /* transform: translateZ(0);
+  will-change: transform; */
 }
+
+#tables_body {
+  margin-top: 0;
+  touch-action: none;
+  will-change: transform;
+}
+
+
 
 
 .apcc_row,
