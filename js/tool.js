@@ -263,7 +263,7 @@ var toolModule = (function () {
     deceleration: 0.0006,
     useTransition: true,
     HWCompositing: true,
-    preventDefault: false,
+    preventDefault: true,
     pointerEvents: "none",
     preventDefaultException: {
       tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/,
