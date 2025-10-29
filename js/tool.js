@@ -264,6 +264,7 @@ var toolModule = (function () {
     useTransition: true,
     HWCompositing: true,
     preventDefault: false,
+    pointerEvents: "none",
     preventDefaultException: {
       tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/,
       className: /(^|\s)btn(\s|$)/,
