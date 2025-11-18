@@ -47,8 +47,9 @@ var toolModule = (function () {
       value: "bleeding_event",
       text: "BLEEDING EPISODE",
       de: "BLUTUNGSEPISODE",
-      es: "EPISODIO HEMORRÁGICO",
+      es: "SANGRADO LEVE/MODERADO",
     },
+
     {
       value: "minor_surgery",
       text: "MINOR SURGERY",
@@ -60,6 +61,12 @@ var toolModule = (function () {
       text: "MAJOR SURGERY",
       de: "GROSSE CHIRURGISCHE EINGRIFFE",
       es: "CIRUGÍA MAYOR",
+    },
+    {
+      value: "major_grave",
+      text: "OTHER",
+      de: "?",
+      es: "SANGRADO GRAVE",
     },
   ]);
 
@@ -136,15 +143,20 @@ var toolModule = (function () {
       eptacogalfa: 1.52,
     },
     minor_surgery: {
-      cevenfacta: 45.96,
+      cevenfacta:null,
+        // 45.96,
       apcc: 5.88,
-      eptacogalfa: 46.24,
+      eptacogalfa:null
+        // 46.24,
     },
     major_surgery: {
-      cevenfacta: 73.23,
+      cevenfacta: null,
+        // 73.23,
       apcc: 24.9,
-      eptacogalfa: 73.68,
+      eptacogalfa: null
+        // 73.68,
     },
+   
   };
 
   var dataTemplate = {
@@ -162,8 +174,15 @@ var toolModule = (function () {
         breakthrough_bleed: defaultDosagePerKg.cevenfacta,
         minor_surgery: defaultDosagePerKg.cevenfacta,
         major_surgery: 0.2,
+        major_grave: 0.225,
       },
-      subsequentDoses: defaultDosagePerKg.cevenfacta,
+      subsequentDoses: {
+        bleeding_event: defaultDosagePerKg.cevenfacta,
+        breakthrough_bleed: null,
+        major_surgery: null,
+        major_surgery: null,
+      },
+      // defaultDosagePerKg.cevenfacta,
       nbOfDoses: {
         bleeding_event: "",
         //  met la case concernée dans un état initial vide
@@ -185,7 +204,13 @@ var toolModule = (function () {
         minor_surgery: defaultDosagePerKg.apcc,
         major_surgery: defaultDosagePerKg.apcc,
       },
-      subsequentDoses: defaultDosagePerKg.apcc,
+      subsequentDoses: {
+        bleeding_event: defaultDosagePerKg.apcc,
+        breakthrough_bleed: null,
+        major_surgery: null,
+        major_surgery: null,
+      },
+      // subsequentDoses: defaultDosagePerKg.apcc,
       nbOfDoses: {
         bleeding_event: defaultDosage[selectTypeEvent_1[0].value].apcc,
         breakthrough_bleed: defaultDosage[selectTypeEvent_2[0].value].apcc,
@@ -201,8 +226,15 @@ var toolModule = (function () {
         breakthrough_bleed: defaultDosagePerKg.eptacogalfa,
         minor_surgery: defaultDosagePerKg.eptacogalfa,
         major_surgery: defaultDosagePerKg.eptacogalfa,
+        major_grave: 0.09,
       },
-      subsequentDoses: defaultDosagePerKg.eptacogalfa,
+      subsequentDoses: {
+        bleeding_event: defaultDosagePerKg.eptacogalfa,
+        breakthrough_bleed: null,
+        major_surgery: null,
+        major_surgery: null,
+      },
+      // subsequentDoses: defaultDosagePerKg.eptacogalfa,
       nbOfDoses: {
         bleeding_event: "",
         //  met la case concernée dans un état initial vide
@@ -228,7 +260,7 @@ var toolModule = (function () {
     cevensave.goBackToTools = document.getElementById("tool_button_2");
     cevensave.toolSection = document.getElementById("tool");
     cevensave.outputSection = document.getElementById("output");
-    cevensave.homeButton = document.getElementById("home_button");
+    cevensave.homeButton= document.getElementById("home_button");
     cevensave.welcomeSection = document.getElementById("welcome");
     cevensave.selectLevel = document.querySelector("select[name=level]");
     cevensave.tablesHeader = document.getElementById("tables_header");
@@ -249,6 +281,7 @@ var toolModule = (function () {
     cevensave.logoApp = document.querySelector("#logo_app");
     cevensave.popupButton = document.getElementById("popup_button");
     cevensave.hasError = document.querySelector(".has_error");
+    cevensave.ref = document.getElementById("references");
   }
 
   var tableScroll = new IScroll("#table_wrapper", {
@@ -382,6 +415,8 @@ var toolModule = (function () {
       cevensave.logoP.style.fontSize = "126px";
       cevensave.logoApp.style.fontSize = "58px";
       cevensave.popupButton.style.display = "none";
+      cevensave.ref.style.display = "block";
+      //
     });
 
     cevensave.apccCheckbox.addEventListener("change", function () {
@@ -893,8 +928,9 @@ var toolModule = (function () {
 
     refreshTable(table);
   }
-
+// bugs
   function handleSubsequentDoseChange(table, input) {
+  
     var data = window.dataToOutput;
     var dataIndex = input.getAttribute("data-index");
     var dataKey = input.getAttribute("data-key");
@@ -1016,7 +1052,7 @@ var toolModule = (function () {
 
     refreshTable(table);
   }
-
+// TODO CHANGE
   function handleClearDoses(table) {
     var data = window.dataToOutput;
     data.forEach(function (patient) {
@@ -1057,7 +1093,7 @@ var toolModule = (function () {
 
     refreshTable(table);
   }
-
+// todo ch
   function handleClearAll() {
     var table = document.querySelector("tbody:not(.hide)");
 
@@ -1067,19 +1103,26 @@ var toolModule = (function () {
       patient.eventPerPatient = dataTemplate.eventPerPatient;
       patient.cevenfacta.initialDose[patient.typeOfEvent] =
         dataTemplate.cevenfacta.initialDose[patient.typeOfEvent];
+    
       patient.cevenfacta.subsequentDoses =
-        dataTemplate.cevenfacta.subsequentDoses;
+        dataTemplate.cevenfacta.subsequentDoses[patient.typeOfEvent];
+   
       patient.cevenfacta.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.cevenfacta.nbOfDoses[patient.typeOfEvent];
       patient.apcc.initialDose[patient.typeOfEvent] =
         dataTemplate.apcc.initialDose[patient.typeOfEvent];
-      patient.apcc.subsequentDoses = dataTemplate.apcc.subsequentDoses;
+    
+      patient.apcc.subsequentDoses =
+        dataTemplate.apcc.subsequentDoses[patient.typeOfEvent];
+    
       patient.apcc.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.apcc.nbOfDoses[patient.typeOfEvent];
       patient.eptacogalfa.initialDose[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.initialDose[patient.typeOfEvent];
+     
       patient.eptacogalfa.subsequentDoses =
-        dataTemplate.eptacogalfa.subsequentDoses;
+        dataTemplate.eptacogalfa.subsequentDoses[patient.typeOfEvent];;
+    
       patient.eptacogalfa.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.nbOfDoses[patient.typeOfEvent];
       patient.cevenfacta.pricePerMg = dataTemplate.cevenfacta.pricePerMg;
@@ -1093,19 +1136,26 @@ var toolModule = (function () {
       patient.eventPerPatient = dataTemplate.eventPerPatient;
       patient.cevenfacta.initialDose[patient.typeOfEvent] =
         dataTemplate.cevenfacta.initialDose[patient.typeOfEvent];
+   
       patient.cevenfacta.subsequentDoses =
-        dataTemplate.cevenfacta.subsequentDoses;
+        dataTemplate.cevenfacta.subsequentDoses[patient.typeOfEvent];
+   
       patient.cevenfacta.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.cevenfacta.nbOfDoses[patient.typeOfEvent];
       patient.apcc.initialDose[patient.typeOfEvent] =
         dataTemplate.apcc.initialDose[patient.typeOfEvent];
-      patient.apcc.subsequentDoses = dataTemplate.apcc.subsequentDoses;
+    
+      patient.apcc.subsequentDoses =
+        dataTemplate.apcc.subsequentDoses[patient.typeOfEvent];
+   
       patient.apcc.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.apcc.nbOfDoses[patient.typeOfEvent];
       patient.eptacogalfa.initialDose[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.initialDose[patient.typeOfEvent];
+    
       patient.eptacogalfa.subsequentDoses =
-        dataTemplate.eptacogalfa.subsequentDoses;
+        dataTemplate.eptacogalfa.subsequentDoses[patient.typeOfEvent];
+    
       patient.eptacogalfa.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.nbOfDoses[patient.typeOfEvent];
       patient.cevenfacta.pricePerMg = dataTemplate.cevenfacta.pricePerMg;
@@ -1119,19 +1169,26 @@ var toolModule = (function () {
       patient.eventPerPatient = dataTemplate.eventPerPatient;
       patient.cevenfacta.initialDose[patient.typeOfEvent] =
         dataTemplate.cevenfacta.initialDose[patient.typeOfEvent];
+     
       patient.cevenfacta.subsequentDoses =
-        dataTemplate.cevenfacta.subsequentDoses;
+        dataTemplate.cevenfacta.subsequentDoses[patient.typeOfEvent];;
+    
       patient.cevenfacta.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.cevenfacta.nbOfDoses[patient.typeOfEvent];
       patient.apcc.initialDose[patient.typeOfEvent] =
         dataTemplate.apcc.initialDose[patient.typeOfEvent];
-      patient.apcc.subsequentDoses = dataTemplate.apcc.subsequentDoses;
+   
+      patient.apcc.subsequentDoses =
+        dataTemplate.apcc.subsequentDose[patient.typeOfEvent];
+    
       patient.apcc.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.apcc.nbOfDoses[patient.typeOfEvent];
       patient.eptacogalfa.initialDose[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.initialDose[patient.typeOfEvent];
+   
       patient.eptacogalfa.subsequentDoses =
-        dataTemplate.eptacogalfa.subsequentDoses;
+        dataTemplate.eptacogalfa.subsequentDoses[patient.typeOfEvent];
+    
       patient.eptacogalfa.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.nbOfDoses[patient.typeOfEvent];
       patient.cevenfacta.pricePerMg = dataTemplate.cevenfacta.pricePerMg;
@@ -1422,6 +1479,8 @@ var toolModule = (function () {
   }
 
   function createSubsequentDoseCell(data, product) {
+   
+   
     var cell = document.createElement("td");
     cell.classList.add("col_10", "table_input");
     var input = document.createElement("input");
@@ -1435,8 +1494,9 @@ var toolModule = (function () {
     input.min = 0;
     input.max = product === "apcc" ? 200 : 200000;
     input.step = 1;
-    input.value =
-      data[product].subsequentDoses * (product === "apcc" ? 1 : 1000);
+    input.value = data[product].subsequentDoses[data.typeOfEvent]===null ? "" :
+      data[product].subsequentDoses[data.typeOfEvent] *
+      (product === "apcc" ? 1 : 1000);
 
     if (
       data.nonReplacementTherapy === selectNonReplacement[1].value &&

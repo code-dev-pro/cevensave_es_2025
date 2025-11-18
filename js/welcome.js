@@ -15,6 +15,7 @@ var welcomeModule = (function () {
     cevensave.logoP = document.querySelector('#logo p');
     cevensave.logoApp = document.querySelector('#logo_app');
     cevensave.popupButton = document.getElementById('popup_button');
+    cevensave.ref = document.getElementById("references");
   }
 
   function init() {
@@ -26,6 +27,7 @@ var welcomeModule = (function () {
       cevensave.toolSection.style.display = 'flex';
       cevensave.outputButton.style.display = 'flex';
       cevensave.homeButton.style.display = 'block';
+      cevensave.ref.style.display = 'none';
       // document.getElementById('header_img').style.top = '-70px';
        cevensave.headerImg.style.top = '-70px';
       
