@@ -1235,3 +1235,17 @@ tr.col_add_row td:nth-child(7) {
   margin-bottom: 5px;
 }
 
+#hospital_thead tr th:nth-child(4){
+  display: none;
+  background-color: red !important;
+}
+#hospital_tbody .col_4{
+  display: none;
+  background-color: red !important;
+}
+#hospital_tbody .col_add_row td:nth-child(4){
+  display: none;
+  background-color: red !important;
+}
+
+  
