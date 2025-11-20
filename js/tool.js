@@ -1162,7 +1162,7 @@ var toolModule = (function () {
         dataTemplate.apcc.initialDose[patient.typeOfEvent];
    
       patient.apcc.subsequentDoses =
-        dataTemplate.apcc.subsequentDose[patient.typeOfEvent];
+        dataTemplate.apcc.subsequentDoses;
     
       patient.apcc.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.apcc.nbOfDoses[patient.typeOfEvent];
@@ -1170,7 +1170,7 @@ var toolModule = (function () {
         dataTemplate.eptacogalfa.initialDose[patient.typeOfEvent];
    
       patient.eptacogalfa.subsequentDoses =
-        dataTemplate.eptacogalfa.subsequentDoses[patient.typeOfEvent];
+        dataTemplate.eptacogalfa.subsequentDoses;
     
       patient.eptacogalfa.nbOfDoses[patient.typeOfEvent] =
         dataTemplate.eptacogalfa.nbOfDoses[patient.typeOfEvent];
