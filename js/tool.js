@@ -188,8 +188,8 @@ var toolModule = (function () {
         // bleeding_event: defaultDosage[selectTypeEvent_1[0].value].cevenfacta,
         breakthrough_bleed:
           defaultDosage[selectTypeEvent_2[0].value].cevenfacta,
-        minor_surgery: defaultDosage[selectTypeEvent_1[1+1].value].cevenfacta,
-        major_surgery: defaultDosage[selectTypeEvent_1[2+1].value].cevenfacta,
+        minor_surgery: defaultDosage[selectTypeEvent_1[2].value].cevenfacta,
+        major_surgery: defaultDosage[selectTypeEvent_1[3].value].cevenfacta,
       },
       pricePerMg: "",
       //  met la case concernée dans un état initial vide
@@ -207,8 +207,8 @@ var toolModule = (function () {
       nbOfDoses: {
         bleeding_event: defaultDosage[selectTypeEvent_1[0].value].apcc,
         breakthrough_bleed: defaultDosage[selectTypeEvent_2[0].value].apcc,
-        minor_surgery: defaultDosage[selectTypeEvent_1[1+1].value].apcc,
-        major_surgery: defaultDosage[selectTypeEvent_1[2+1].value].apcc,
+        minor_surgery: defaultDosage[selectTypeEvent_1[2].value].apcc,
+        major_surgery: defaultDosage[selectTypeEvent_1[3].value].apcc,
       },
       pricePerMg: selectApccPresentation[0].price,
     },
@@ -228,8 +228,8 @@ var toolModule = (function () {
         // bleeding_event: defaultDosage[selectTypeEvent_1[0].value].eptacogalfa,
         breakthrough_bleed:
           defaultDosage[selectTypeEvent_2[0].value].eptacogalfa,
-        minor_surgery: defaultDosage[selectTypeEvent_1[1+1].value].eptacogalfa,
-        major_surgery: defaultDosage[selectTypeEvent_1[2+1].value].eptacogalfa,
+        minor_surgery: defaultDosage[selectTypeEvent_1[2].value].eptacogalfa,
+        major_surgery: defaultDosage[selectTypeEvent_1[3].value].eptacogalfa,
       },
       pricePerMg: "",
       //  met la case concernée dans un état initial vide
